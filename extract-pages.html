@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract PDF Pages Online Free | Split PDF Pages | SmartConverter</title>
+    <meta name="description" content="Extract specific pages from PDF files online for free. Split PDF documents and save selected pages as separate files. Easy PDF page extractor." />
+    <meta name="keywords" content="extract PDF pages, split PDF, PDF page extractor, separate PDF pages, free PDF splitter" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/extract-pages.html" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <style>
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <div class="tool-icon">
+                <i class="fas fa-copy"></i>
+            </div>
+            <h1>Advanced PDF Page Extractor</h1>
+            <p>Extract specific pages from your PDF documents with precision and professional-grade functionality</p>
+        </div>
+
+        <div class="main-card">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Upload PDF File</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+            </div>
+
+            <div class="file-preview" id="filePreview">
+                <div class="file-info">
+                    <div class="file-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="file-details">
+                        <h4 id="fileName">document.pdf</h4>
+                        <p id="fileSize">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="selection-info">
+                    <h4><i class="fas fa-info-circle"></i> Page Selection</h4>
+                    <p>Click on pages below to select them, or use the range input for specific pages</p>
+                    <button class="select-all-btn" id="selectAllBtn">Select All Pages</button>
+                    <p id="selectionStatus">No pages selected</p>
+                </div>
+
+                <div class="page-grid" id="pageGrid"></div>
+            </div>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <h3><i class="fas fa-list-ol"></i> Page Range</h3>
+                    <p style="color: #666; margin-bottom: 15px;">Enter specific pages (e.g., 1,3,5-8) or select visually above</p>
+                    <input type="text" class="range-input" id="pageRange" placeholder="1-3, 5, 7-10">
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-cog"></i> Extract Options</h3>
+                    <div class="option-item">
+                        <input type="radio" name="extractMode" value="single" id="singleMode" checked>
+                        <label for="singleMode">Extract to single PDF</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="extractMode" value="multiple" id="multipleMode">
+                        <label for="multipleMode">Extract each page separately</label>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-tools"></i> Output Options</h3>
+                    <div class="option-item">
+                        <input type="checkbox" name="preserve" id="preserve" checked>
+                        <label for="preserve">Preserve formatting</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="optimize" id="optimize">
+                        <label for="optimize">Optimize extracted PDF</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="metadata" id="metadata">
+                        <label for="metadata">Preserve metadata</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Initializing...</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="extractBtn" disabled>
+                    <i class="fas fa-copy"></i> Extract Pages
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+
+            <div class="result-card" id="resultCard">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Pages Extracted Successfully!</h2>
+                <p id="resultInfo">Your extracted pages are ready for download</p>
+                <div id="downloadLinks"></div>
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button class="btn btn-secondary" id="newExtractBtn">
+                        <i class="fas fa-plus"></i> Extract From Another File
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class PDFExtractor {
+            constructor() {
+                this.pdfDoc = null;
+                this.selectedPages = new Set();
+                this.totalPages = 0;
+                this.extractedBlobs = [];
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const uploadZone = document.getElementById('uploadZone');
+                const fileInput = document.getElementById('fileInput');
+                const extractBtn = document.getElementById('extractBtn');
+                const clearBtn = document.getElementById('clearBtn');
+                const newExtractBtn = document.getElementById('newExtractBtn');
+                const selectAllBtn = document.getElementById('selectAllBtn');
+                const pageRange = document.getElementById('pageRange');
+
+                // Upload zone events
+                uploadZone.addEventListener('click', () => fileInput.click());
+                uploadZone.addEventListener('dragover', this.handleDragOver.bind(this));
+                uploadZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                uploadZone.addEventListener('drop', this.handleDrop.bind(this));
+
+                // File input change
+                fileInput.addEventListener('change', this.handleFileSelect.bind(this));
+
+                // Button events
+                extractBtn.addEventListener('click', this.extractPages.bind(this));
+                clearBtn.addEventListener('click', this.clearAll.bind(this));
+                newExtractBtn.addEventListener('click', this.resetTool.bind(this));
+                selectAllBtn.addEventListener('click', this.selectAllPages.bind(this));
+
+                // Page range input
+                pageRange.addEventListener('input', this.handleRangeInput.bind(this));
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.add('dragover');
+            }
+
+            handleDragLeave(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files).filter(file => file.type === 'application/pdf');
+                if (files.length > 0) {
+                    this.loadPDF(files[0]);
+                }
+            }
+
+            handleFileSelect(e) {
+                const file = e.target.files[0];
+                if (file && file.type === 'application/pdf') {
+                    this.loadPDF(file);
+                }
+            }
+
+            async loadPDF(file) {
+                try {
+                    const arrayBuffer = await file.arrayBuffer();
+                    this.pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+                    this.totalPages = this.pdfDoc.getPageCount();
+                    
+                    // Update UI
+                    document.getElementById('fileName').textContent = file.name;
+                    document.getElementById('fileSize').textContent = `${(file.size / 1024 / 1024).toFixed(2)} MB • ${this.totalPages} pages`;
+                    document.getElementById('filePreview').style.display = 'block';
+                    
+                    this.generatePageGrid();
+                    this.updateUI();
+                } catch (error) {
+                    console.error('Error loading PDF:', error);
+                    alert('Error loading PDF. Please ensure it\'s a valid PDF file.');
+                }
+            }
+
+            generatePageGrid() {
+                const pageGrid = document.getElementById('pageGrid');
+                pageGrid.innerHTML = '';
+                
+                for (let i = 1; i <= this.totalPages; i++) {
+                    const pageItem = document.createElement('div');
+                    pageItem.className = 'page-item';
+                    pageItem.dataset.page = i;
+                    
+                    pageItem.innerHTML = `
+                        <div class="page-number">Page ${i}</div>
+                        <div class="page-thumbnail">${i}</div>
+                    `;
+                    
+                    pageItem.addEventListener('click', () => this.togglePageSelection(i));
+                    pageGrid.appendChild(pageItem);
+                }
+            }
+
+            togglePageSelection(pageNum) {
+                if (this.selectedPages.has(pageNum)) {
+                    this.selectedPages.delete(pageNum);
+                } else {
+                    this.selectedPages.add(pageNum);
+                }
+                this.updatePageDisplay();
+                this.updateRangeInput();
+                this.updateUI();
+            }
+
+            selectAllPages() {
+                this.selectedPages.clear();
+                for (let i = 1; i <= this.totalPages; i++) {
+                    this.selectedPages.add(i);
+                }
+                this.updatePageDisplay();
+                this.updateRangeInput();
+                this.updateUI();
+            }
+
+            updatePageDisplay() {
+                const pageItems = document.querySelectorAll('.page-item');
+                pageItems.forEach(item => {
+                    const pageNum = parseInt(item.dataset.page);
+                    if (this.selectedPages.has(pageNum)) {
+                        item.classList.add('selected');
+                    } else {
+                        item.classList.remove('selected');
+                    }
+                });
+            }
+
+            updateRangeInput() {
+                const sortedPages = Array.from(this.selectedPages).sort((a, b) => a - b);
+                const ranges = this.convertToRanges(sortedPages);
+                document.getElementById('pageRange').value = ranges.join(', ');
+            }
+
+            convertToRanges(pages) {
+                if (pages.length === 0) return [];
+                
+                const ranges = [];
+                let start = pages[0];
+                let end = pages[0];
+                
+                for (let i = 1; i < pages.length; i++) {
+                    if (pages[i] === end + 1) {
+                        end = pages[i];
+                    } else {
+                        if (start === end) {
+                            ranges.push(start.toString());
+                        } else {
+                            ranges.push(`${start}-${end}`);
+                        }
+                        start = end = pages[i];
+                    }
+                }
+                
+                if (start === end) {
+                    ranges.push(start.toString());
+                } else {
+                    ranges.push(`${start}-${end}`);
+                }
+                
+                return ranges;
+            }
+
+            handleRangeInput(e) {
+                const input = e.target.value.trim();
+                if (!input) {
+                    this.selectedPages.clear();
+                } else {
+                    const pages = this.parsePageRange(input);
+                    this.selectedPages = new Set(pages);
+                }
+                this.updatePageDisplay();
+                this.updateUI();
+            }
+
+            parsePageRange(input) {
+                const pages = new Set();
+                const parts = input.split(',').map(part => part.trim());
+                
+                for (const part of parts) {
+                    if (part.includes('-')) {
+                        const [start, end] = part.split('-').map(num => parseInt(num.trim()));
+                        if (start && end && start <= end) {
+                            for (let i = Math.max(1, start); i <= Math.min(this.totalPages, end); i++) {
+                                pages.add(i);
+                            }
+                        }
+                    } else {
+                        const num = parseInt(part);
+                        if (num && num >= 1 && num <= this.totalPages) {
+                            pages.add(num);
+                        }
+                    }
+                }
+                
+                return Array.from(pages);
+            }
+
+            updateUI() {
+                const extractBtn = document.getElementById('extractBtn');
+                const selectionStatus = document.getElementById('selectionStatus');
+                
+                if (this.selectedPages.size > 0 && this.pdfDoc) {
+                    extractBtn.disabled = false;
+                    selectionStatus.textContent = `${this.selectedPages.size} page(s) selected`;
+                } else {
+                    extractBtn.disabled = true;
+                    selectionStatus.textContent = 'No pages selected';
+                }
+            }
+
+            async extractPages() {
+                if (this.selectedPages.size === 0 || !this.pdfDoc) return;
+
+                const progressContainer = document.getElementById('progressContainer');
+                const progressFill = document.getElementById('progressFill');
+                const progressText = document.getElementById('progressText');
+                const extractBtn = document.getElementById('extractBtn');
+
+                progressContainer.style.display = 'block';
+                extractBtn.disabled = true;
+                this.extractedBlobs = [];
+
+                try {
+                    const extractMode = document.querySelector('input[name="extractMode"]:checked').value;
+                    const sortedPages = Array.from(this.selectedPages).sort((a, b) => a - b);
+
+                    if (extractMode === 'single') {
+                        await this.extractToSinglePDF(sortedPages, progressFill, progressText);
+                    } else {
+                        await this.extractToMultiplePDFs(sortedPages, progressFill, progressText);
+                    }
+
+                    this.showResult();
+                } catch (error) {
+                    console.error('Error extracting pages:', error);
+                    alert('Error extracting pages. Please try again.');
+                    progressContainer.style.display = 'none';
+                    extractBtn.disabled = false;
+                }
+            }
+
+            async extractToSinglePDF(pages, progressFill, progressText) {
+                progressText.textContent = 'Creating extracted PDF...';
+                
+                const newPdf = await PDFLib.PDFDocument.create();
+                
+                for (let i = 0; i < pages.length; i++) {
+                    const pageNum = pages[i];
+                    const [page] = await newPdf.copyPages(this.pdfDoc, [pageNum - 1]);
+                    newPdf.addPage(page);
+                    
+                    const progress = ((i + 1) / pages.length) * 100;
+                    progressFill.style.width = `${progress}%`;
+                    progressText.textContent = `Processing page ${pageNum}...`;
+                    
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                }
+
+                // Add metadata if enabled
+                if (document.getElementById('metadata').checked) {
+                    newPdf.setTitle('Extracted Pages');
+                    newPdf.setCreator('Advanced PDF Page Extractor');
+                    newPdf.setCreationDate(new Date());
+                }
+
+                const pdfBytes = await newPdf.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                
+                this.extractedBlobs.push({
+                    blob: blob,
+                    filename: `extracted_pages_${pages.length}_pages.pdf`,
+                    info: `${pages.length} pages`
+                });
+            }
+
+            async extractToMultiplePDFs(pages, progressFill, progressText) {
+                for (let i = 0; i < pages.length; i++) {
+                    const pageNum = pages[i];
+                    progressText.textContent = `Creating PDF for page ${pageNum}...`;
+                    
+                    const newPdf = await PDFLib.PDFDocument.create();
+                    const [page] = await newPdf.copyPages(this.pdfDoc, [pageNum - 1]);
+                    newPdf.addPage(page);
+
+                    if (document.getElementById('metadata').checked) {
+                        newPdf.setTitle(`Page ${pageNum}`);
+                        newPdf.setCreator('Advanced PDF Page Extractor');
+                        newPdf.setCreationDate(new Date());
+                    }
+
+                    const pdfBytes = await newPdf.save();
+                    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                    
+                    this.extractedBlobs.push({
+                        blob: blob,
+                        filename: `page_${pageNum}.pdf`,
+                        info: `Page ${pageNum}`
+                    });
+                    
+                    const progress = ((i + 1) / pages.length) * 100;
+                    progressFill.style.width = `${progress}%`;
+                    
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+            }
+
+            showResult() {
+                const resultCard = document.getElementById('resultCard');
+                const resultInfo = document.getElementById('resultInfo');
+                const downloadLinks = document.getElementById('downloadLinks');
+                const progressContainer = document.getElementById('progressContainer');
+
+                progressContainer.style.display = 'none';
+                
+                let totalSize = this.extractedBlobs.reduce((sum, item) => sum + item.blob.size, 0);
+                let resultText = '';
+                
+                if (this.extractedBlobs.length === 1) {
+                    resultText = `${this.extractedBlobs[0].info} • ${(totalSize / 1024 / 1024).toFixed(2)} MB`;
+                } else {
+                    resultText = `${this.extractedBlobs.length} PDF files created • ${(totalSize / 1024 / 1024).toFixed(2)} MB total`;
+                }
+                
+                resultInfo.textContent = resultText;
+
+                // Create download buttons
+                downloadLinks.innerHTML = '';
+                this.extractedBlobs.forEach((item, index) => {
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'btn btn-primary';
+                    downloadBtn.style.margin = '10px 5px';
+                    downloadBtn.innerHTML = `<i class="fas fa-download"></i> Download ${item.info}`;
+                    downloadBtn.onclick = () => this.downloadFile(item.blob, item.filename);
+                    downloadLinks.appendChild(downloadBtn);
+                });
+
+                resultCard.style.display = 'block';
+                resultCard.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            downloadFile(blob, filename) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            clearAll() {
+                this.pdfDoc = null;
+                this.selectedPages.clear();
+                this.totalPages = 0;
+                this.extractedBlobs = [];
+                
+                                document.getElementById('fileInput').value = '';
+                                document.getElementById('filePreview').style.display = 'none';
+                                document.getElementById('pageRange').value = '';
+                                document.getElementById('pageGrid').innerHTML = '';
+                                document.getElementById('progressContainer').style.display = 'none';
+                                document.getElementById('resultCard').style.display = 'none';
+                                this.updateUI();
+                            }
+                
+                            resetTool() {
+                                this.clearAll();
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }
+                        }
+                
+                        // Initialize the tool
+                        window.addEventListener('DOMContentLoaded', () => {
+                            window.pdfExtractor = new PDFExtractor();
+                        });
+                    </script>
+                </body>
+                </html>

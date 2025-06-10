@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete PDF Pages Online Free | Remove PDF Pages | SmartConverter</title>
+    <meta name="description" content="Delete unwanted pages from PDF files online for free. Remove specific pages or page ranges from PDF documents easily and quickly." />
+    <meta name="keywords" content="delete PDF pages, remove PDF pages, extract PDF pages, PDF page remover, free PDF editor" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/delete-pages.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <style>
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <div class="tool-icon">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+            <h1>Advanced PDF Page Deleter</h1>
+            <p>Remove unwanted pages from your PDF documents with precision and ease</p>
+        </div>
+
+        <div class="main-card">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Upload PDF File</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+            </div>
+
+            <div class="file-info-section" id="fileInfoSection">
+                <div class="file-info">
+                    <div class="file-details">
+                        <div class="file-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="file-meta">
+                            <h4 id="fileName">document.pdf</h4>
+                            <p id="fileSize">Loading...</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-small" id="changeFileBtn">
+                        <i class="fas fa-edit"></i> Change File
+                    </button>
+                </div>
+
+                <div class="page-selection-area">
+                    <div class="page-selection-header">
+                        <h3>Select Pages to Delete</h3>
+                    </div>
+                    
+                    <div class="quick-select-buttons">
+                        <button class="btn btn-secondary btn-small" id="selectAllBtn">Select All</button>
+                        <button class="btn btn-secondary btn-small" id="selectNoneBtn">Clear Selection</button>
+                        <button class="btn btn-secondary btn-small" id="selectOddBtn">Odd Pages</button>
+                        <button class="btn btn-secondary btn-small" id="selectEvenBtn">Even Pages</button>
+                    </div>
+
+                    <div class="selection-controls">
+                        <input type="text" id="pageRangeInput" class="page-input" 
+                               placeholder="Enter pages/ranges (e.g., 1,3,5-8)" />
+                        <button class="btn btn-secondary" id="applyRangeBtn">Apply Range</button>
+                    </div>
+
+                    <div class="selection-summary" id="selectionSummary" style="display: none;">
+                        <strong>Selected pages:</strong> <span id="selectedPagesText">None</span>
+                    </div>
+
+                    <div class="pages-grid" id="pagesGrid">
+                        <!-- Page thumbnails will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <h3><i class="fas fa-cog"></i> Processing Options</h3>
+                    <div class="option-item">
+                        <input type="checkbox" name="preserveFormat" id="preserveFormat" checked>
+                        <label for="preserveFormat">Preserve formatting and layout</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="optimizeSize" id="optimizeSize">
+                        <label for="optimizeSize">Optimize file size</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="preserveMetadata" id="preserveMetadata" checked>
+                        <label for="preserveMetadata">Preserve document metadata</label>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-info-circle"></i> Document Info</h3>
+                    <div class="option-item">
+                        <label><strong>Total Pages:</strong> <span id="totalPages">0</span></label>
+                    </div>
+                    <div class="option-item">
+                        <label><strong>Pages Selected:</strong> <span id="selectedCount">0</span></label>
+                    </div>
+                    <div class="option-item">
+                        <label><strong>Pages Remaining:</strong> <span id="remainingCount">0</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Processing...</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="deleteBtn" disabled>
+                    <i class="fas fa-trash-alt"></i> Delete Selected Pages
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+
+            <div class="result-card" id="resultCard">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Pages Deleted Successfully!</h2>
+                <p id="resultInfo">Your modified PDF is ready for download</p>
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download Modified PDF
+                    </button>
+                    <button class="btn btn-secondary" id="newDeleteBtn">
+                        <i class="fas fa-plus"></i> Process Another File
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class PDFPageDeleter {
+            constructor() {
+                this.pdfDoc = null;
+                this.pdfBytes = null;
+                this.selectedPages = new Set();
+                this.totalPages = 0;
+                this.modifiedPdfBlob = null;
+                this.fileName = '';
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const uploadZone = document.getElementById('uploadZone');
+                const fileInput = document.getElementById('fileInput');
+                const deleteBtn = document.getElementById('deleteBtn');
+                const clearBtn = document.getElementById('clearBtn');
+                const changeFileBtn = document.getElementById('changeFileBtn');
+                const downloadBtn = document.getElementById('downloadBtn');
+                const newDeleteBtn = document.getElementById('newDeleteBtn');
+
+                // Upload events
+                uploadZone.addEventListener('click', () => fileInput.click());
+                uploadZone.addEventListener('dragover', this.handleDragOver.bind(this));
+                uploadZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                uploadZone.addEventListener('drop', this.handleDrop.bind(this));
+
+                fileInput.addEventListener('change', this.handleFileSelect.bind(this));
+                changeFileBtn.addEventListener('click', () => fileInput.click());
+
+                // Action buttons
+                deleteBtn.addEventListener('click', this.deletePages.bind(this));
+                clearBtn.addEventListener('click', this.resetTool.bind(this));
+                downloadBtn.addEventListener('click', this.downloadModifiedPDF.bind(this));
+                newDeleteBtn.addEventListener('click', this.resetTool.bind(this));
+
+                // Selection buttons
+                document.getElementById('selectAllBtn').addEventListener('click', this.selectAllPages.bind(this));
+                document.getElementById('selectNoneBtn').addEventListener('click', this.clearSelection.bind(this));
+                document.getElementById('selectOddBtn').addEventListener('click', this.selectOddPages.bind(this));
+                document.getElementById('selectEvenBtn').addEventListener('click', this.selectEvenPages.bind(this));
+                document.getElementById('applyRangeBtn').addEventListener('click', this.applyPageRange.bind(this));
+
+                // Page range input
+                document.getElementById('pageRangeInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.applyPageRange();
+                });
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.add('dragover');
+            }
+
+            handleDragLeave(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files).filter(file => file.type === 'application/pdf');
+                if (files.length > 0) {
+                    this.loadPDF(files[0]);
+                }
+            }
+
+            handleFileSelect(e) {
+                if (e.target.files.length > 0) {
+                    this.loadPDF(e.target.files[0]);
+                }
+            }
+
+            async loadPDF(file) {
+                try {
+                    this.fileName = file.name;
+                    const arrayBuffer = await file.arrayBuffer();
+                    this.pdfBytes = arrayBuffer;
+                    this.pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+                    this.totalPages = this.pdfDoc.getPageCount();
+                    
+                    this.updateFileInfo(file);
+                    this.generatePageThumbnails();
+                    this.updateUI();
+                    
+                } catch (error) {
+                    console.error('Error loading PDF:', error);
+                    alert('Error loading PDF. Please ensure it\'s a valid PDF file.');
+                }
+            }
+
+            updateFileInfo(file) {
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('fileSize').textContent = 
+                    `${(file.size / 1024 / 1024).toFixed(2)} MB • ${this.totalPages} pages`;
+                document.getElementById('totalPages').textContent = this.totalPages;
+                document.getElementById('fileInfoSection').style.display = 'block';
+            }
+
+            generatePageThumbnails() {
+                const pagesGrid = document.getElementById('pagesGrid');
+                pagesGrid.innerHTML = '';
+
+                for (let i = 1; i <= this.totalPages; i++) {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = 'page-thumbnail';
+                    thumbnail.textContent = i;
+                    thumbnail.dataset.pageNumber = i;
+                    
+                    thumbnail.addEventListener('click', () => {
+                        this.togglePageSelection(i);
+                    });
+                    
+                    pagesGrid.appendChild(thumbnail);
+                }
+            }
+
+            togglePageSelection(pageNumber) {
+                const thumbnail = document.querySelector(`[data-page-number="${pageNumber}"]`);
+                
+                if (this.selectedPages.has(pageNumber)) {
+                    this.selectedPages.delete(pageNumber);
+                    thumbnail.classList.remove('selected');
+                } else {
+                    this.selectedPages.add(pageNumber);
+                    thumbnail.classList.add('selected');
+                }
+                
+                this.updateSelectionDisplay();
+            }
+
+            selectAllPages() {
+                this.selectedPages.clear();
+                for (let i = 1; i <= this.totalPages; i++) {
+                    this.selectedPages.add(i);
+                }
+                this.updateThumbnailSelection();
+                this.updateSelectionDisplay();
+            }
+
+            clearSelection() {
+                this.selectedPages.clear();
+                this.updateThumbnailSelection();
+                this.updateSelectionDisplay();
+            }
+
+            selectOddPages() {
+                this.selectedPages.clear();
+                for (let i = 1; i <= this.totalPages; i += 2) {
+                    this.selectedPages.add(i);
+                }
+                this.updateThumbnailSelection();
+                this.updateSelectionDisplay();
+            }
+
+            selectEvenPages() {
+                this.selectedPages.clear();
+                for (let i = 2; i <= this.totalPages; i += 2) {
+                    this.selectedPages.add(i);
+                }
+                this.updateThumbnailSelection();
+                this.updateSelectionDisplay();
+            }
+
+            applyPageRange() {
+                const rangeInput = document.getElementById('pageRangeInput').value;
+                if (!rangeInput.trim()) return;
+
+                try {
+                    const pages = this.parsePageRange(rangeInput);
+                    this.selectedPages.clear();
+                    pages.forEach(page => {
+                        if (page >= 1 && page <= this.totalPages) {
+                            this.selectedPages.add(page);
+                        }
+                    });
+                    this.updateThumbnailSelection();
+                    this.updateSelectionDisplay();
+                } catch (error) {
+                    alert('Invalid page range format. Use format like: 1,3,5-8');
+                }
+            }
+
+            parsePageRange(rangeStr) {
+                const pages = new Set();
+                const parts = rangeStr.split(',');
+                
+                for (const part of parts) {
+                    const trimmed = part.trim();
+                    if (trimmed.includes('-')) {
+                        const [start, end] = trimmed.split('-').map(x => parseInt(x.trim()));
+                        if (!isNaN(start) && !isNaN(end) && start <= end) {
+                            for (let i = start; i <= end; i++) {
+                                pages.add(i);
+                            }
+                        } else {
+                            throw new Error('Invalid range');
+                        }
+                    } else {
+                        const pageNum = parseInt(trimmed);
+                        if (!isNaN(pageNum)) {
+                            pages.add(pageNum);
+                        } else {
+                            throw new Error('Invalid page number');
+                        }
+                    }
+                }
+                
+                return Array.from(pages);
+            }
+
+            updateThumbnailSelection() {
+                document.querySelectorAll('.page-thumbnail').forEach(thumbnail => {
+                    const pageNumber = parseInt(thumbnail.dataset.pageNumber);
+                    if (this.selectedPages.has(pageNumber)) {
+                        thumbnail.classList.add('selected');
+                    } else {
+                        thumbnail.classList.remove('selected');
+                    }
+                });
+            }
+
+            updateSelectionDisplay() {
+                const selectedCount = this.selectedPages.size;
+                const remainingCount = this.totalPages - selectedCount;
+                
+                document.getElementById('selectedCount').textContent = selectedCount;
+                document.getElementById('remainingCount').textContent = remainingCount;
+                
+                const selectionSummary = document.getElementById('selectionSummary');
+                const selectedPagesText = document.getElementById('selectedPagesText');
+                
+                if (selectedCount > 0) {
+                    selectionSummary.style.display = 'block';
+                    const sortedPages = Array.from(this.selectedPages).sort((a, b) => a - b);
+                    selectedPagesText.textContent = this.formatPageList(sortedPages);
+                } else {
+                    selectionSummary.style.display = 'none';
+                }
+                
+                this.updateUI();
+            }
+
+            formatPageList(pages) {
+                if (pages.length === 0) return 'None';
+                if (pages.length > 10) return `${pages.length} pages selected`;
+                
+                // Group consecutive pages into ranges
+                const ranges = [];
+                let start = pages[0];
+                let end = start;
+                
+                for (let i = 1; i < pages.length; i++) {
+                    if (pages[i] === end + 1) {
+                        end = pages[i];
+                    } else {
+                        ranges.push(start === end ? `${start}` : `${start}-${end}`);
+                        start = end = pages[i];
+                    }
+                }
+                ranges.push(start === end ? `${start}` : `${start}-${end}`);
+                
+                return ranges.join(', ');
+            }
+
+            updateUI() {
+                const deleteBtn = document.getElementById('deleteBtn');
+                deleteBtn.disabled = this.selectedPages.size === 0 || this.selectedPages.size === this.totalPages;
+                
+                if (this.selectedPages.size === this.totalPages) {
+                    deleteBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Cannot delete all pages';
+                } else {
+                    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Delete Selected Pages';
+                }
+            }
+
+            async deletePages() {
+                if (this.selectedPages.size === 0 || this.selectedPages.size === this.totalPages) return;
+
+                const progressContainer = document.getElementById('progressContainer');
+                const progressFill = document.getElementById('progressFill');
+                const progressText = document.getElementById('progressText');
+                const deleteBtn = document.getElementById('deleteBtn');
+
+                progressContainer.style.display = 'block';
+                deleteBtn.disabled = true;
+                progressText.textContent = 'Processing PDF...';
+
+                try {
+                    // Create new PDF with remaining pages
+                    const newPdf = await PDFLib.PDFDocument.create();
+                    const pagesToKeep = [];
+                    
+                    for (let i = 1; i <= this.totalPages; i++) {
+                        if (!this.selectedPages.has(i)) {
+                            pagesToKeep.push(i - 1); // Convert to 0-based index
+                        }
+                    }
+
+                    progressText.textContent = 'Copying remaining pages...';
+                    progressFill.style.width = '30%';
+
+                    // Copy pages that should be kept
+                    const copiedPages = await newPdf.copyPages(this.pdfDoc, pagesToKeep);
+                    copiedPages.forEach(page => newPdf.addPage(page));
+
+                    progressText.textContent = 'Applying settings...';
+                    progressFill.style.width = '70%';
+
+                    // Apply metadata settings
+                    if (document.getElementById('preserveMetadata').checked) {
+                        try {
+                            const title = this.pdfDoc.getTitle();
+                            const author = this.pdfDoc.getAuthor();
+                            const subject = this.pdfDoc.getSubject();
+                            const creator = this.pdfDoc.getCreator();
+                            
+                            if (title) newPdf.setTitle(title);
+                            if (author) newPdf.setAuthor(author);
+                            if (subject) newPdf.setSubject(subject);
+                            if (creator) newPdf.setCreator(creator);
+                        } catch (e) {
+                            console.log('Could not copy metadata:', e);
+                        }
+                    }
+
+                    // Optionally optimize file size (dummy, as pdf-lib does not support real optimization)
+                    if (document.getElementById('optimizeSize').checked) {
+                        // Placeholder for optimization logic
+                        // In real implementation, you might compress images, remove unused objects, etc.
+                        // For now, just log
+                        console.log('Optimize size option selected (no-op)');
+                    }
+
+                    // Save the new PDF
+                    progressText.textContent = 'Saving PDF...';
+                    progressFill.style.width = '90%';
+                    const newPdfBytes = await newPdf.save();
+                    this.modifiedPdfBlob = new Blob([newPdfBytes], { type: 'application/pdf' });
+
+                    progressText.textContent = 'Done!';
+                    progressFill.style.width = '100%';
+
+                    // Show result card
+                    document.getElementById('resultCard').style.display = 'block';
+                    document.getElementById('progressContainer').style.display = 'none';
+                    document.getElementById('resultInfo').textContent = `Your modified PDF with ${this.totalPages - this.selectedPages.size} pages is ready for download.`;
+                } catch (error) {
+                    progressText.textContent = 'An error occurred!';
+                    progressFill.style.width = '100%';
+                    alert('Failed to process PDF: ' + error.message);
+                    document.getElementById('progressContainer').style.display = 'none';
+                }
+            }
+
+            downloadModifiedPDF() {
+                if (!this.modifiedPdfBlob) return;
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(this.modifiedPdfBlob);
+                a.download = this.fileName.replace(/\.pdf$/i, '_modified.pdf');
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(a.href);
+                }, 100);
+            }
+
+            resetTool() {
+                // Reset all UI and state
+                this.pdfDoc = null;
+                this.pdfBytes = null;
+                this.selectedPages.clear();
+                this.totalPages = 0;
+                this.modifiedPdfBlob = null;
+                this.fileName = '';
+                document.getElementById('fileInfoSection').style.display = 'none';
+                document.getElementById('pagesGrid').innerHTML = '';
+                document.getElementById('progressContainer').style.display = 'none';
+                document.getElementById('resultCard').style.display = 'none';
+                document.getElementById('deleteBtn').disabled = true;
+                document.getElementById('deleteBtn').innerHTML = '<i class="fas fa-trash-alt"></i> Delete Selected Pages';
+                document.getElementById('pageRangeInput').value = '';
+                document.getElementById('selectedCount').textContent = '0';
+                document.getElementById('remainingCount').textContent = '0';
+                document.getElementById('totalPages').textContent = '0';
+            }
+        }
+
+        // Initialize the tool
+        window.addEventListener('DOMContentLoaded', () => {
+            new PDFPageDeleter();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Barcode PDF Online Free | Barcode to PDF Converter | SmartConverter</title>
+    <meta name="description" content="Create barcode PDFs online for free. Generate QR codes, UPC, EAN, and other barcodes in PDF format. Fast and reliable barcode PDF generator." />
+    <meta name="keywords" content="barcode to PDF, generate barcode PDF, QR code PDF, UPC barcode PDF, free barcode generator, barcode creator" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/barcode-to-pdf.html" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        /* Missing CSS Classes */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+        .barcode-generator {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .preview-area {
+            background: #f9fafb;
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .barcode-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .barcode-item .remove-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .settings-panel {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .status-message {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .status-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        .batch-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .file-upload input[type=file] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .upload-label {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .batch-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .batch-controls > * {
+                margin: 0.25rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Barcode to PDF Converter</h1>
+            <p class="subtitle">Generate professional barcodes and export to PDF</p>
+        </header>
+
+        <div class="barcode-generator">
+            <!-- Single Barcode Generation -->
+            <div class="section">
+                <h2 class="section-title">Single Barcode Generator</h2>
+                
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label class="input-label">Barcode Data</label>
+                        <input type="text" id="barcodeData" class="form-input" placeholder="Enter data to encode" value="123456789">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Barcode Type</label>
+                        <select id="barcodeType" class="form-select">
+                            <option value="CODE128">CODE128</option>
+                            <option value="CODE39">CODE39</option>
+                            <option value="EAN13">EAN13</option>
+                            <option value="EAN8">EAN8</option>
+                            <option value="UPC">UPC</option>
+                            <option value="ITF14">ITF14</option>
+                            <option value="MSI">MSI</option>
+                            <option value="pharmacode">Pharmacode</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-panel">
+                    <h3>Barcode Settings</h3>
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label class="input-label">Width</label>
+                            <input type="number" id="barcodeWidth" class="form-input" value="2" min="1" max="5" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Height</label>
+                            <input type="number" id="barcodeHeight" class="form-input" value="100" min="50" max="300">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Show Text</label>
+                            <select id="showText" class="form-select">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Font Size</label>
+                            <input type="number" id="fontSize" class="form-input" value="12" min="8" max="24">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="batch-controls">
+                    <div>
+                        <button onclick="generateBarcode()" class="btn-primary">Generate Barcode</button>
+                        <button onclick="addToBatch()" class="btn-secondary">Add to Batch</button>
+                        <button onclick="downloadSingleBarcode()" class="btn-secondary" id="downloadSingleBtn" style="display: none;">Download PNG</button>
+                        <button onclick="downloadSinglePDF()" class="btn-primary" id="downloadSinglePDFBtn" style="display: none;">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch Upload -->
+            <div class="section">
+                <h2 class="section-title">Batch Processing</h2>
+                
+                <div class="file-upload">
+                    <input type="file" id="csvFile" accept=".csv,.txt" onchange="processBatchFile()">
+                    <label for="csvFile" class="upload-label">Upload CSV/TXT File</label>
+                </div>
+                
+                <p class="text-sm text-gray-600">CSV format: data,type (e.g., 123456789,CODE128)</p>
+            </div>
+
+            <!-- Preview Area -->
+            <div class="section">
+                <h2 class="section-title">Preview</h2>
+                <div id="previewArea" class="preview-area">
+                    <p class="text-gray-500">Generated barcodes will appear here</p>
+                </div>
+            </div>
+
+            <!-- Batch List -->
+            <div class="section" id="batchSection" style="display: none;">
+                <h2 class="section-title">Batch List</h2>
+                <div id="batchList" class="preview-area" style="min-height: auto; padding: 1rem;">
+                </div>
+                <div class="batch-controls">
+                    <button onclick="clearBatch()" class="btn-danger">Clear All</button>
+                    <button onclick="downloadBatchImages()" class="btn-secondary">Download All PNG</button>
+                    <button onclick="generatePDF()" class="btn-primary">Download Batch PDF</button>
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div id="progressSection" style="display: none;">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let batchBarcodes = [];
+        let barcodeCounter = 0;
+        let currentBarcodeCanvas = null;
+
+        function generateBarcode() {
+            const data = document.getElementById('barcodeData').value;
+            const type = document.getElementById('barcodeType').value;
+            
+            if (!data.trim()) {
+                showStatus('Please enter barcode data', 'error');
+                return;
+            }
+
+            try {
+                const canvas = document.createElement('canvas');
+                JsBarcode(canvas, data, {
+                    format: type,
+                    width: parseFloat(document.getElementById('barcodeWidth').value),
+                    height: parseInt(document.getElementById('barcodeHeight').value),
+                    displayValue: document.getElementById('showText').value === 'true',
+                    fontSize: parseInt(document.getElementById('fontSize').value)
+                });
+
+                // Store current canvas for download
+                currentBarcodeCanvas = canvas;
+
+                const previewArea = document.getElementById('previewArea');
+                previewArea.innerHTML = '';
+                
+                const container = document.createElement('div');
+                container.className = 'barcode-item';
+                container.appendChild(canvas);
+                
+                const label = document.createElement('p');
+                label.textContent = `${type}: ${data}`;
+                label.style.marginTop = '8px';
+                label.style.fontSize = '14px';
+                container.appendChild(label);
+                
+                previewArea.appendChild(container);
+                
+                // Show download buttons
+                document.getElementById('downloadSingleBtn').style.display = 'inline-block';
+                document.getElementById('downloadSinglePDFBtn').style.display = 'inline-block';
+                
+                showStatus('Barcode generated successfully!', 'success');
+                
+            } catch (error) {
+                showStatus('Error generating barcode: ' + error.message, 'error');
+            }
+        }
+
+        function downloadSingleBarcode() {
+            if (!currentBarcodeCanvas) {
+                showStatus('Please generate a barcode first', 'error');
+                return;
+            }
+
+            try {
+                // Convert canvas to blob
+                currentBarcodeCanvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `barcode_${document.getElementById('barcodeData').value}_${Date.now()}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    
+                    showStatus('Barcode downloaded successfully!', 'success');
+                }, 'image/png');
+                
+            } catch (error) {
+                showStatus('Error downloading barcode: ' + error.message, 'error');
+            }
+        }
+
+        function downloadSinglePDF() {
+            if (!currentBarcodeCanvas) {
+                showStatus('Please generate a barcode first', 'error');
+                return;
+            }
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                
+                // Convert canvas to image
+                const imgData = currentBarcodeCanvas.toDataURL('image/png');
+                const imgWidth = 150;
+                const imgHeight = (currentBarcodeCanvas.height / currentBarcodeCanvas.width) * imgWidth;
+                
+                // Center the barcode on page
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const x = (pageWidth - imgWidth) / 2;
+                
+                pdf.addImage(imgData, 'PNG', x, 30, imgWidth, imgHeight);
+                
+                // Add text label
+                pdf.setFontSize(12);
+                const data = document.getElementById('barcodeData').value;
+                const type = document.getElementById('barcodeType').value;
+                pdf.text(`${type}: ${data}`, pageWidth / 2, 30 + imgHeight + 20, { align: 'center' });
+                
+                // Save PDF
+                const filename = `barcode_${data}_${Date.now()}.pdf`;
+                pdf.save(filename);
+                
+                showStatus('PDF downloaded successfully!', 'success');
+                
+            } catch (error) {
+                showStatus('Error downloading PDF: ' + error.message, 'error');
+            }
+        }
+
+        async function downloadBatchImages() {
+            if (batchBarcodes.length === 0) {
+                showStatus('No barcodes in batch', 'error');
+                return;
+            }
+
+            showProgress(true);
+            updateProgress(0, 'Preparing ZIP file...');
+
+            try {
+                const zip = new JSZip();
+                
+                for (let i = 0; i < batchBarcodes.length; i++) {
+                    const config = batchBarcodes[i];
+                    updateProgress((i / batchBarcodes.length) * 80, `Processing image ${i + 1}/${batchBarcodes.length}`);
+
+                    // Create canvas for each barcode
+                    const canvas = document.createElement('canvas');
+                    JsBarcode(canvas, config.data, {
+                        format: config.type,
+                        width: config.width,
+                        height: config.height,
+                        displayValue: config.showText,
+                        fontSize: config.fontSize
+                    });
+
+                    // Convert to blob and add to zip
+                    const blob = await new Promise(resolve => {
+                        canvas.toBlob(resolve, 'image/png');
+                    });
+                    
+                    const filename = `barcode_${config.type}_${config.data.replace(/[^a-zA-Z0-9]/g, '_')}_${config.id}.png`;
+                    zip.file(filename, blob);
+                    
+                    // Small delay to prevent blocking
+                    await new Promise(resolve => setTimeout(resolve, 10));
+                }
+
+                updateProgress(90, 'Creating ZIP file...');
+                
+                // Generate and download ZIP
+                const zipBlob = await zip.generateAsync({type: 'blob'});
+                const url = URL.createObjectURL(zipBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `barcodes_batch_${Date.now()}.zip`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                updateProgress(100, 'Download complete!');
+                showStatus(`ZIP file downloaded with ${batchBarcodes.length} barcode images!`, 'success');
+                
+            } catch (error) {
+                showStatus('Error downloading images: ' + error.message, 'error');
+            } finally {
+                showProgress(false);
+            }
+        }
+
+        function addToBatch() {
+            const data = document.getElementById('barcodeData').value;
+            const type = document.getElementById('barcodeType').value;
+            
+            if (!data.trim()) {
+                showStatus('Please enter barcode data', 'error');
+                return;
+            }
+
+            const barcodeConfig = {
+                id: ++barcodeCounter,
+                data: data,
+                type: type,
+                width: parseFloat(document.getElementById('barcodeWidth').value),
+                height: parseInt(document.getElementById('barcodeHeight').value),
+                showText: document.getElementById('showText').value === 'true',
+                fontSize: parseInt(document.getElementById('fontSize').value)
+            };
+
+            batchBarcodes.push(barcodeConfig);
+            updateBatchDisplay();
+            showStatus(`Added to batch (${batchBarcodes.length} items)`, 'success');
+            
+            // Clear input
+            document.getElementById('barcodeData').value = '';
+        }
+
+        function updateBatchDisplay() {
+            const batchSection = document.getElementById('batchSection');
+            const batchList = document.getElementById('batchList');
+            
+            if (batchBarcodes.length === 0) {
+                batchSection.style.display = 'none';
+                return;
+            }
+            
+            batchSection.style.display = 'block';
+            batchList.innerHTML = '';
+            
+            batchBarcodes.forEach((config) => {
+                const item = document.createElement('div');
+                item.className = 'barcode-item';
+                item.innerHTML = `
+                    <canvas id="batch-canvas-${config.id}"></canvas>
+                    <p style="margin-top: 8px; font-size: 14px;">${config.type}: ${config.data}</p>
+                    <button class="remove-btn" onclick="removeFromBatch(${config.id})">×</button>
+                `;
+                batchList.appendChild(item);
+                
+                // Generate barcode
+                try {
+                    JsBarcode(`#batch-canvas-${config.id}`, config.data, {
+                        format: config.type,
+                        width: config.width,
+                        height: config.height,
+                        displayValue: config.showText,
+                        fontSize: config.fontSize
+                    });
+                } catch (error) {
+                    console.error('Error generating batch barcode:', error);
+                }
+            });
+        }
+
+        function removeFromBatch(id) {
+            batchBarcodes = batchBarcodes.filter(barcode => barcode.id !== id);
+            updateBatchDisplay();
+            showStatus('Removed from batch', 'success');
+        }
+
+        function clearBatch() {
+            batchBarcodes = [];
+            updateBatchDisplay();
+            showStatus('Batch cleared', 'success');
+        }
+
+        function processBatchFile() {
+            const file = document.getElementById('csvFile').files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const lines = text.split('\n').filter(line => line.trim());
+                
+                let processed = 0;
+                lines.forEach(line => {
+                    const parts = line.split(',');
+                    if (parts.length >= 1) {
+                        const data = parts[0].trim();
+                        const type = parts[1] ? parts[1].trim() : 'CODE128';
+                        
+                        if (data) {
+                            const barcodeConfig = {
+                                id: ++barcodeCounter,
+                                data: data,
+                                type: type,
+                                width: 2,
+                                height: 100,
+                                showText: true,
+                                fontSize: 12
+                            };
+                            batchBarcodes.push(barcodeConfig);
+                            processed++;
+                        }
+                    }
+                });
+                
+                updateBatchDisplay();
+                showStatus(`Processed ${processed} barcodes from file`, 'success');
+            };
+            reader.readAsText(file);
+        }
+
+        async function generatePDF() {
+            if (batchBarcodes.length === 0) {
+                showStatus('No barcodes in batch', 'error');
+                return;
+            }
+
+            showProgress(true);
+            updateProgress(0, 'Preparing PDF...');
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                
+                let yPosition = 20;
+                const margin = 20;
+                const barcodeSpacing = 80;
+
+                for (let i = 0; i < batchBarcodes.length; i++) {
+                    const config = batchBarcodes[i];
+                    updateProgress((i / batchBarcodes.length) * 100, `Processing barcode ${i + 1}/${batchBarcodes.length}`);
+
+                    // Create temporary canvas
+                    const canvas = document.createElement('canvas');
+                    JsBarcode(canvas, config.data, {
+                        format: config.type,
+                        width: config.width,
+                        height: config.height,
+                        displayValue: config.showText,
+                        fontSize: config.fontSize
+                    });
+
+                    // Convert to image
+                    const imgData = canvas.toDataURL('image/png');
+                    const imgWidth = 150;
+                    const imgHeight = (canvas.height / canvas.width) * imgWidth;
+
+                    // Check if we need a new page
+                    if (yPosition + imgHeight + 40 > pageHeight - margin) {
+                        pdf.addPage();
+                        yPosition = 20;
+                    }
+
+                    // Add barcode to PDF
+                    pdf.addImage(imgData, 'PNG', (pageWidth - imgWidth) / 2, yPosition, imgWidth, imgHeight);
+                    
+                    // Add text label
+                    pdf.setFontSize(10);
+                    pdf.text(`${config.type}: ${config.data}`, pageWidth / 2, yPosition + imgHeight + 15, { align: 'center' });
+                    
+                    yPosition += imgHeight + 40;
+                    
+                    // Small delay to prevent blocking
+                    await new Promise(resolve => setTimeout(resolve, 10));
+                }
+
+                updateProgress(100, 'Generating PDF file...');
+                
+                // Save PDF
+                const filename = `barcodes_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.pdf`;
+                pdf.save(filename);
+                
+                showStatus(`PDF generated successfully! (${batchBarcodes.length} barcodes)`, 'success');
+                
+            } catch (error) {
+                showStatus('Error generating PDF: ' + error.message, 'error');
+            } finally {
+                showProgress(false);
+            }
+        }
+
+        function showProgress(show) {
+            document.getElementById('progressSection').style.display = show ? 'block' : 'none';
+        }
+
+        function updateProgress(percent, message) {
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('statusMessage').textContent = message;
+            document.getElementById('statusMessage').className = 'status-message';
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                if (statusDiv.textContent === message) {
+                    statusDiv.style.display = 'none';
+                }
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generateBarcode(); // Generate initial example
+        });
+    </script>
+</body>
+</html>

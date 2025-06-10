@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR PDF Online Free | Extract Text from PDF | SmartConverter</title>
+    <meta name="description" content="Extract text from scanned PDFs using OCR technology online for free. Convert image-based PDFs to searchable text documents." />
+    <meta name="keywords" content="OCR PDF, extract text from PDF, PDF OCR online, scanned PDF to text, free OCR tool" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/ocr-pdf.html" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Missing CSS classes only */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+        .ocr-preview {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .ocr-canvas-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .ocr-canvas {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .ocr-text-output {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 200px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .language-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .language-option {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            font-size: 0.9rem;
+        }
+
+        .language-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .language-option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .ocr-status {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .confidence-meter {
+            margin: 15px 0;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #dc3545, #ffc107, #28a745);
+            transition: width 0.3s ease;
+        }
+
+        .confidence-text {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .text-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .copy-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #138496;
+        }
+
+        .save-txt-btn {
+            background: #6f42c1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .save-txt-btn:hover {
+            background: #5a36a3;
+        }
+
+        .processing-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .page-selector {
+            margin: 20px 0;
+        }
+
+        .page-range-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .page-range-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .batch-processing {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .batch-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .batch-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+
+        .status-processing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .format-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+
+        .format-option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .format-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .format-option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .range-example {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <div class="tool-icon">
+                <i class="fas fa-eye"></i>
+            </div>
+            <h1>OCR PDF Converter</h1>
+            <p>Extract text from PDF documents using advanced OCR technology. Support for multiple languages and high accuracy text recognition.</p>
+        </div>
+
+        <div class="main-card">
+            <!-- File Upload Section -->
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Drop PDF files here or click to browse</h3>
+                    <p>Supports PDF files up to 50MB</p>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf" multiple style="display: none;">
+            </div>
+
+            <!-- File List -->
+            <div class="file-list" id="fileList" style="display: none;"></div>
+
+            <!-- OCR Options -->
+            <div class="options-grid" id="ocrOptions" style="display: none;">
+                <div class="option-card">
+                    <h3><i class="fas fa-language"></i> Language Selection</h3>
+                    <div class="language-selector" id="languageSelector">
+                        <div class="language-option selected" data-lang="eng">English</div>
+                        <div class="language-option" data-lang="ara">Arabic</div>
+                        <div class="language-option" data-lang="urd">Urdu</div>
+                        <div class="language-option" data-lang="hin">Hindi</div>
+                        <div class="language-option" data-lang="fra">French</div>
+                        <div class="language-option" data-lang="spa">Spanish</div>
+                        <div class="language-option" data-lang="deu">German</div>
+                        <div class="language-option" data-lang="chi_sim">Chinese</div>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-cogs"></i> OCR Settings</h3>
+                    <div class="option-item">
+                        <input type="checkbox" id="preserveLayout" checked>
+                        <label for="preserveLayout">Preserve Layout</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="detectTables">
+                        <label for="detectTables">Detect Tables</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="removeNoise">
+                        <label for="removeNoise">Remove Image Noise</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="enhanceContrast">
+                        <label for="enhanceContrast">Enhance Contrast</label>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-file-alt"></i> Output Format</h3>
+                    <div class="format-selector">
+                        <div class="format-option selected" data-format="txt">
+                            <i class="fas fa-file-alt"></i>
+                            <div>Plain Text</div>
+                        </div>
+                        <div class="format-option" data-format="docx">
+                            <i class="fas fa-file-word"></i>
+                            <div>Word Document</div>
+                        </div>
+                        <div class="format-option" data-format="pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            <div>Searchable PDF</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Selection -->
+            <div class="page-selector" id="pageSelector" style="display: none;">
+                <div class="option-card">
+                    <h3><i class="fas fa-file-alt"></i> Page Selection</h3>
+                    <div class="option-item">
+                        <input type="radio" name="pageRange" id="allPages" value="all" checked>
+                        <label for="allPages">All Pages</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="pageRange" id="customRange" value="custom">
+                        <label for="customRange">Custom Range</label>
+                    </div>
+                    <input type="text" class="page-range-input" id="pageRangeInput" placeholder="e.g., 1-5, 8, 10-12" disabled>
+                    <div class="range-example">Examples: 1-5 (pages 1 to 5), 1,3,5 (specific pages), 1-3,7-9 (multiple ranges)</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <button class="btn btn-primary" id="startOcrBtn">
+                    <i class="fas fa-play"></i> Start OCR Processing
+                </button>
+                <button class="btn btn-secondary" id="clearAllBtn">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Ready to start...</div>
+            </div>
+
+            <!-- OCR Status -->
+            <div class="ocr-status" id="ocrStatus" style="display: none;">
+                <div class="processing-animation">
+                    <div class="spinner"></div>
+                    <span style="margin-left: 15px;">Processing PDF with OCR...</span>
+                </div>
+            </div>
+
+            <!-- Batch Processing -->
+            <div class="batch-processing" id="batchProcessing" style="display: none;">
+                <h4><i class="fas fa-list"></i> Batch Processing Status</h4>
+                <div id="batchList"></div>
+            </div>
+
+            <!-- OCR Preview -->
+            <div class="ocr-preview" id="ocrPreview" style="display: none;">
+                <h3><i class="fas fa-eye"></i> OCR Preview</h3>
+                
+                <!-- Canvas for PDF preview -->
+                <div class="ocr-canvas-container" id="canvasContainer" style="display: none;">
+                    <canvas class="ocr-canvas" id="pdfCanvas"></canvas>
+                </div>
+
+                <!-- Confidence Meter -->
+                <div class="confidence-meter" id="confidenceMeter" style="display: none;">
+                    <label>OCR Confidence:</label>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidenceFill"></div>
+                    </div>
+                    <div class="confidence-text" id="confidenceText">0%</div>
+                </div>
+
+                <!-- Extracted Text -->
+                <div class="ocr-text-output" id="extractedText" placeholder="Extracted text will appear here..."></div>
+
+                <!-- Text Actions -->
+                <div class="text-actions">
+                    <button class="copy-btn" id="copyTextBtn">
+                        <i class="fas fa-copy"></i> Copy Text
+                    </button>
+                    <button class="save-txt-btn" id="saveTxtBtn">
+                        <i class="fas fa-download"></i> Save as TXT
+                    </button>
+                    <button class="download-btn" id="downloadBtn" style="display: none;">
+                        <i class="fas fa-download"></i> Download Result
+                    </button>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="errorText">An error occurred during processing.</span>
+            </div>
+
+            <!-- Security Note -->
+            <div class="security-note">
+                <i class="fas fa-shield-alt"></i>
+                Your files are processed locally in your browser. No data is sent to external servers.
+            </div>
+        </div>
+    </div>
+
+    <!-- Include required libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <script>
+        // PDF.js worker setup
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        
+        // DOM elements
+        const fileInput = document.getElementById('fileInput');
+        const uploadZone = document.getElementById('uploadZone');
+        const fileList = document.getElementById('fileList');
+        const ocrOptions = document.getElementById('ocrOptions');
+        const pageSelector = document.getElementById('pageSelector');
+        const actionButtons = document.getElementById('actionButtons');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const ocrStatus = document.getElementById('ocrStatus');
+        const batchProcessing = document.getElementById('batchProcessing');
+        const batchList = document.getElementById('batchList');
+        const ocrPreview = document.getElementById('ocrPreview');
+        const canvasContainer = document.getElementById('canvasContainer');
+        const pdfCanvas = document.getElementById('pdfCanvas');
+        const confidenceMeter = document.getElementById('confidenceMeter');
+        const confidenceFill = document.getElementById('confidenceFill');
+        const confidenceText = document.getElementById('confidenceText');
+        const extractedText = document.getElementById('extractedText');
+        const copyTextBtn = document.getElementById('copyTextBtn');
+        const saveTxtBtn = document.getElementById('saveTxtBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const startOcrBtn = document.getElementById('startOcrBtn');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        const languageSelector = document.getElementById('languageSelector');
+        const allPagesRadio = document.getElementById('allPages');
+        const customRangeRadio = document.getElementById('customRange');
+        const pageRangeInput = document.getElementById('pageRangeInput');
+        
+        // Global variables
+        let uploadedFiles = [];
+        let selectedLanguage = 'eng';
+        let selectedFormat = 'txt';
+        let currentProcessingFile = null;
+        let processingWorker = null;
+        let extractedTextData = [];
+        
+        // Initialize the application
+        function init() {
+            setupEventListeners();
+            hideError();
+        }
+        
+        // Set up event listeners
+        function setupEventListeners() {
+            // File upload
+            uploadZone.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // Drag and drop
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('dragover');
+            });
+            
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.classList.remove('dragover');
+            });
+            
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect({ target: fileInput });
+                }
+            });
+            
+            // Language selection
+            languageSelector.addEventListener('click', (e) => {
+                if (e.target.classList.contains('language-option')) {
+                    document.querySelectorAll('.language-option').forEach(option => {
+                        option.classList.remove('selected');
+                    });
+                    e.target.classList.add('selected');
+                    selectedLanguage = e.target.dataset.lang;
+                }
+            });
+            
+            // Format selection
+            document.querySelectorAll('.format-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.format-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    option.classList.add('selected');
+                    selectedFormat = option.dataset.format;
+                });
+            });
+            
+            // Page range selection
+            allPagesRadio.addEventListener('change', () => {
+                pageRangeInput.disabled = true;
+            });
+            
+            customRangeRadio.addEventListener('change', () => {
+                pageRangeInput.disabled = false;
+            });
+            
+            // Action buttons
+            startOcrBtn.addEventListener('click', startOCRProcessing);
+            clearAllBtn.addEventListener('click', clearAll);
+            copyTextBtn.addEventListener('click', copyExtractedText);
+            saveTxtBtn.addEventListener('click', saveAsTextFile);
+            downloadBtn.addEventListener('click', downloadResult);
+        }
+        
+        // Handle file selection
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+            
+            // Validate files
+            const validFiles = files.filter(file => file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf'));
+            if (validFiles.length === 0) {
+                showError('Please select valid PDF files');
+                return;
+            }
+            
+            // Add files to the list
+            uploadedFiles = [...uploadedFiles, ...validFiles];
+            updateFileList();
+            showOptions();
+        }
+        
+        // Update the file list display
+        function updateFileList() {
+            fileList.innerHTML = '';
+            
+            if (uploadedFiles.length === 0) {
+                fileList.style.display = 'none';
+                return;
+            }
+            
+            fileList.style.display = 'block';
+            
+            uploadedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <p>${formatFileSize(file.size)}</p>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn btn-danger" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                fileList.appendChild(fileItem);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.file-actions .btn-danger').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.currentTarget.dataset.index);
+                    uploadedFiles.splice(index, 1);
+                    updateFileList();
+                    
+                    if (uploadedFiles.length === 0) {
+                        hideOptions();
+                    }
+                });
+            });
+        }
+        
+        // Show options after files are uploaded
+        function showOptions() {
+            ocrOptions.style.display = 'grid';
+            pageSelector.style.display = 'block';
+            actionButtons.style.display = 'flex';
+        }
+        
+        // Hide options when no files are selected
+        function hideOptions() {
+            ocrOptions.style.display = 'none';
+            pageSelector.style.display = 'none';
+            actionButtons.style.display = 'none';
+        }
+        
+        // Start OCR processing
+        function startOCRProcessing() {
+            if (uploadedFiles.length === 0) {
+                showError('No files selected for processing');
+                return;
+            }
+            
+            // Hide options and show progress
+            hideOptions();
+            progressContainer.style.display = 'block';
+            ocrStatus.style.display = 'block';
+            batchProcessing.style.display = 'block';
+            
+            // Initialize batch processing
+            initBatchProcessing();
+            
+            // Process each file
+            processFilesSequentially();
+        }
+        
+        // Initialize batch processing UI
+        function initBatchProcessing() {
+            batchList.innerHTML = '';
+            
+            uploadedFiles.forEach((file, index) => {
+                const batchItem = document.createElement('div');
+                batchItem.className = 'batch-item';
+                batchItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <span class="batch-status status-pending">Pending</span>
+                `;
+                batchItem.id = `batch-item-${index}`;
+                batchList.appendChild(batchItem);
+            });
+        }
+        
+        // Process files one by one
+        async function processFilesSequentially() {
+            for (let i = 0; i < uploadedFiles.length; i++) {
+                currentProcessingFile = uploadedFiles[i];
+                updateBatchStatus(i, 'processing');
+                
+                try {
+                    await processPdfFile(currentProcessingFile, i);
+                    updateBatchStatus(i, 'completed');
+                } catch (error) {
+                    console.error('Error processing file:', currentProcessingFile.name, error);
+                    updateBatchStatus(i, 'error');
+                    showError(`Error processing ${currentProcessingFile.name}: ${error.message}`);
+                }
+                
+                // Update progress
+                const progress = ((i + 1) / uploadedFiles.length) * 100;
+                updateProgress(progress);
+            }
+            
+            // Processing complete
+            progressText.textContent = 'Processing complete';
+            ocrStatus.style.display = 'none';
+            showResults();
+        }
+        
+        // Update batch item status
+        function updateBatchStatus(index, status) {
+            const batchItem = document.getElementById(`batch-item-${index}`);
+            if (!batchItem) return;
+            
+            const statusElement = batchItem.querySelector('.batch-status');
+            if (!statusElement) return;
+            
+            statusElement.className = 'batch-status';
+            
+            switch (status) {
+                case 'pending':
+                    statusElement.classList.add('status-pending');
+                    statusElement.textContent = 'Pending';
+                    break;
+                case 'processing':
+                    statusElement.classList.add('status-processing');
+                    statusElement.textContent = 'Processing';
+                    break;
+                case 'completed':
+                    statusElement.classList.add('status-completed');
+                    statusElement.textContent = 'Completed';
+                    break;
+                case 'error':
+                    statusElement.classList.add('status-error');
+                    statusElement.textContent = 'Error';
+                    break;
+            }
+        }
+        
+        // Process a single PDF file
+        async function processPdfFile(file, fileIndex) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const arrayBuffer = await file.arrayBuffer();
+                    const pdfDoc = await pdfjsLib.getDocument(arrayBuffer).promise;
+                    
+                    // Get page range to process
+                    const pageRange = getPageRange(pdfDoc.numPages);
+                    
+                    // Process each page
+                    for (const pageNum of pageRange) {
+                        try {
+                            const page = await pdfDoc.getPage(pageNum);
+                            const textContent = await extractTextFromPage(page, pageNum);
+                            
+                            // Store extracted text
+                            extractedTextData.push({
+                                fileIndex,
+                                pageNum,
+                                text: textContent.text,
+                                confidence: textContent.confidence
+                            });
+                            
+                        } catch (pageError) {
+                            console.error(`Error processing page ${pageNum} of ${file.name}:`, pageError);
+                        }
+                    }
+                    
+                    resolve();
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+        
+        // Extract text from a PDF page using OCR
+        async function extractTextFromPage(page, pageNum) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    // Render PDF page to canvas
+                    const viewport = page.getViewport({ scale: 2.0 });
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    await page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    }).promise;
+                    
+                    // Initialize Tesseract.js worker
+                    processingWorker = Tesseract.createWorker({
+                        logger: m => console.log(m)
+                    });
+                    
+                    await processingWorker.load();
+                    await processingWorker.loadLanguage(selectedLanguage);
+                    await processingWorker.initialize(selectedLanguage);
+                    
+                    // Apply OCR settings
+                    if (document.getElementById('preserveLayout').checked) {
+                        await processingWorker.setParameters({
+                            preserve_interword_spaces: '1'
+                        });
+                    }
+                    
+                    // Perform OCR
+                    const { data } = await processingWorker.recognize(canvas);
+                    
+                    // Terminate worker
+                    await processingWorker.terminate();
+                    processingWorker = null;
+                    
+                    resolve({
+                        text: data.text,
+                        confidence: data.confidence
+                    });
+                    
+                } catch (error) {
+                    if (processingWorker) {
+                        await processingWorker.terminate();
+                        processingWorker = null;
+                    }
+                    reject(error);
+                }
+            });
+        }
+        
+        // Get the page range to process based on user selection
+        function getPageRange(totalPages) {
+            if (allPagesRadio.checked) {
+                return Array.from({ length: totalPages }, (_, i) => i + 1);
+            }
+            
+            const rangeText = pageRangeInput.value.trim();
+            if (!rangeText) return [1]; // Default to first page if no range specified
+            
+            // Parse complex page ranges like "1-5, 8, 10-12"
+            const pages = new Set();
+            const parts = rangeText.split(',');
+            
+            for (const part of parts) {
+                const trimmed = part.trim();
+                if (trimmed.includes('-')) {
+                    const [start, end] = trimmed.split('-').map(num => parseInt(num.trim()));
+                    const realStart = Math.max(1, Math.min(start, totalPages));
+                    const realEnd = Math.max(1, Math.min(end || realStart, totalPages));
+                    
+                    for (let i = realStart; i <= realEnd; i++) {
+                        pages.add(i);
+                    }
+                } else {
+                    const pageNum = parseInt(trimmed);
+                    if (!isNaN(pageNum)) {
+                        pages.add(Math.max(1, Math.min(pageNum, totalPages)));
+                    }
+                }
+            }
+            
+            return Array.from(pages).sort((a, b) => a - b);
+        }
+        
+        // Show the extracted text results
+        function showResults() {
+            if (extractedTextData.length === 0) {
+                showError('No text was extracted from the documents');
+                return;
+            }
+            
+            // Group text by file
+            const textByFile = {};
+            extractedTextData.forEach(item => {
+                if (!textByFile[item.fileIndex]) {
+                    textByFile[item.fileIndex] = {
+                        fileName: uploadedFiles[item.fileIndex].name,
+                        pages: []
+                    };
+                }
+                textByFile[item.fileIndex].pages.push(item);
+            });
+            
+            // Display the results
+            let resultText = '';
+            let totalConfidence = 0;
+            let count = 0;
+            
+            Object.values(textByFile).forEach(fileData => {
+                resultText += `=== ${fileData.fileName} ===\n\n`;
+                
+                fileData.pages.forEach(page => {
+                    resultText += `--- Page ${page.pageNum} ---\n`;
+                    resultText += `${page.text}\n\n`;
+                    
+                    if (page.confidence) {
+                        totalConfidence += page.confidence;
+                        count++;
+                    }
+                });
+            });
+            
+            extractedText.textContent = resultText;
+            
+            // Calculate and display average confidence
+            if (count > 0) {
+                const avgConfidence = totalConfidence / count;
+                confidenceFill.style.width = `${avgConfidence}%`;
+                confidenceText.textContent = `${avgConfidence.toFixed(1)}% confidence`;
+                confidenceMeter.style.display = 'block';
+            }
+            
+            // Show preview and download options
+            ocrPreview.style.display = 'block';
+            
+            // Show appropriate download button based on selected format
+            downloadBtn.style.display = selectedFormat !== 'txt' ? 'block' : 'none';
+            saveTxtBtn.style.display = selectedFormat === 'txt' ? 'block' : 'none';
+        }
+        
+        // Copy extracted text to clipboard
+        function copyExtractedText() {
+            navigator.clipboard.writeText(extractedText.textContent)
+                .then(() => {
+                    const originalText = copyTextBtn.innerHTML;
+                    copyTextBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        copyTextBtn.innerHTML = originalText;
+                    }, 2000);
+                })
+                .catch(err => {
+                    showError('Failed to copy text: ' + err);
+                });
+        }
+        
+        // Save extracted text as a text file
+        function saveAsTextFile() {
+            const blob = new Blob([extractedText.textContent], { type: 'text/plain;charset=utf-8' });
+            saveAs(blob, 'extracted_text.txt');
+        }
+        
+        // Download result in selected format
+        function downloadResult() {
+            if (selectedFormat === 'pdf') {
+                generateSearchablePDF();
+            } else if (selectedFormat === 'docx') {
+                generateWordDocument();
+            }
+        }
+        
+        // Generate a searchable PDF
+        function generateSearchablePDF() {
+            // This is a simplified version - in a real app you'd want to properly position the text
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Split text into pages
+            const lines = doc.splitTextToSize(extractedText.textContent, 180);
+            doc.text(lines, 10, 10);
+            
+            doc.save('extracted_text.pdf');
+        }
+        
+        // Generate a Word document
+        function generateWordDocument() {
+            const { Document, Paragraph, TextRun, Packer } = docx;
+            
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: extractedText.textContent,
+                                    size: 24
+                                })
+                            ]
+                        })
+                    ]
+                }]
+            });
+            
+            Packer.toBlob(doc).then(blob => {
+                saveAs(blob, "extracted_text.docx");
+            });
+        }
+        
+        // Update progress bar
+        function updateProgress(percent) {
+            progressFill.style.width = `${percent}%`;
+            progressText.textContent = `${Math.round(percent)}% complete`;
+        }
+        
+        // Show error message
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+        
+        // Hide error message
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+        
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+        
+        // Clear all files and reset the UI
+        function clearAll() {
+            // Terminate any active worker
+            if (processingWorker) {
+                processingWorker.terminate();
+                processingWorker = null;
+            }
+            
+            // Reset state
+            uploadedFiles = [];
+            extractedTextData = [];
+            currentProcessingFile = null;
+            
+            // Reset UI
+            fileInput.value = '';
+            fileList.innerHTML = '';
+            fileList.style.display = 'none';
+            hideOptions();
+            progressContainer.style.display = 'none';
+            ocrStatus.style.display = 'none';
+            batchProcessing.style.display = 'none';
+            ocrPreview.style.display = 'none';
+            confidenceMeter.style.display = 'none';
+            extractedText.textContent = '';
+            hideError();
+            
+            // Reset upload zone
+            uploadZone.innerHTML = `
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Drop PDF files here or click to browse</h3>
+                    <p>Supports PDF files up to 50MB</p>
+                </div>
+            `;
+        }
+        
+        // Initialize the app
+        init();
+    </script>
+</body>
+</html>

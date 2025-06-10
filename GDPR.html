@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDPR Compliance | Privacy Rights | SmartConverter</title>
+    <meta name="description" content="SmartConverter GDPR compliance information. Learn about your privacy rights and how we protect your data when using our PDF tools." />
+    <meta name="keywords" content="GDPR compliance, privacy rights, data protection, SmartConverter privacy, PDF tools privacy" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/gdpr.html" />
+    <style>
+        /* Your existing styles plus GDPR styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* GDPR Cookie Banner */
+        .gdpr-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gdpr-banner.show {
+            transform: translateY(0);
+        }
+
+        .gdpr-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .gdpr-text {
+            flex: 1;
+        }
+
+        .gdpr-text h3 {
+            color: #3498db;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .gdpr-text p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .gdpr-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .gdpr-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .gdpr-accept {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .gdpr-accept:hover {
+            background-color: #229954;
+        }
+
+        .gdpr-decline {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .gdpr-decline:hover {
+            background-color: #c0392b;
+        }
+
+        .gdpr-settings {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .gdpr-settings:hover {
+            background-color: white;
+            color: #2c3e50;
+        }
+
+        /* Privacy Settings Modal */
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+        }
+
+        .privacy-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .privacy-content {
+            background: white;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .privacy-header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .privacy-body {
+            padding: 20px;
+        }
+
+        .privacy-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+
+        .privacy-section h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .privacy-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+            background-color: #ccc;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-switch.active {
+            background-color: #27ae60;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(25px);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Privacy Dashboard */
+        .privacy-dashboard {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .privacy-dashboard h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .privacy-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .privacy-option:last-child {
+            border-bottom: none;
+        }
+
+        /* Data Request Forms */
+        .data-request-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Privacy Notice */
+        .privacy-notice {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .privacy-notice h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gdpr-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .gdpr-buttons {
+                justify-content: center;
+            }
+
+            .privacy-content {
+                width: 95%;
+                margin: 10px;
+            }
+        }
+
+        /* Header and other existing styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">PDF<span>Tools</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#" onclick="showPrivacyDashboard()">Privacy Center</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- GDPR Cookie Banner -->
+    <div id="gdprBanner" class="gdpr-banner">
+        <div class="gdpr-content">
+            <div class="gdpr-text">
+                <h3><i class="fas fa-shield-alt"></i> Your Privacy Matters</h3>
+                <p>We use cookies and similar technologies to enhance your experience, analyze site usage, and provide personalized content. By clicking "Accept All", you consent to our use of cookies. You can manage your preferences anytime.</p>
+            </div>
+            <div class="gdpr-buttons">
+                <button class="gdpr-btn gdpr-accept" onclick="acceptAllCookies()">Accept All</button>
+                <button class="gdpr-btn gdpr-decline" onclick="declineAllCookies()">Decline All</button>
+                <button class="gdpr-btn gdpr-settings" onclick="showCookieSettings()">Cookie Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Settings Modal -->
+    <div id="privacyModal" class="privacy-modal">
+        <div class="privacy-content">
+            <div class="privacy-header">
+                <h2><i class="fas fa-cog"></i> Privacy Settings</h2>
+                <button class="close-modal" onclick="closePrivacyModal()">&times;</button>
+            </div>
+            <div class="privacy-body">
+                <div class="privacy-section">
+                    <h4>Essential Cookies</h4>
+                    <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+                    <div class="privacy-toggle">
+                        <span>Always Active</span>
+                        <div class="toggle-switch active">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-section">
+                    <h4>Analytics Cookies</h4>
+                    <p>These cookies help us understand how visitors interact with our website.</p>
+                    <div class="privacy-toggle">
+                        <span>Enable Analytics</span>
+                        <div class="toggle-switch" id="analyticsToggle" onclick="toggleCookieType('analytics')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-section">
+                    <h4>Marketing Cookies</h4>
+                    <p>These cookies are used to deliver personalized advertisements.</p>
+                    <div class="privacy-toggle">
+                        <span>Enable Marketing</span>
+                        <div class="toggle-switch" id="marketingToggle" onclick="toggleCookieType('marketing')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="gdpr-btn gdpr-accept" onclick="savePrivacySettings()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Dashboard -->
+    <div id="privacyDashboard" style="display: none;">
+        <div class="container">
+            <div class="privacy-dashboard">
+                <h2><i class="fas fa-user-shield"></i> Privacy Dashboard</h2>
+                
+                <div class="privacy-option">
+                    <div>
+                        <h4>Download Your Data</h4>
+                        <p>Get a copy of all personal data we have about you</p>
+                    </div>
+                    <button class="gdpr-btn gdpr-accept" onclick="showDataRequest('download')">Download Data</button>
+                </div>
+
+                <div class="privacy-option">
+                    <div>
+                        <h4>Delete Your Data</h4>
+                        <p>Request permanent deletion of your personal data</p>
+                    </div>
+                    <button class="gdpr-btn gdpr-decline" onclick="showDataRequest('delete')">Delete Data</button>
+                </div>
+
+                <div class="privacy-option">
+                    <div>
+                        <h4>Update Your Data</h4>
+                        <p>Correct or update your personal information</p>
+                    </div>
+                    <button class="gdpr-btn gdpr-settings" onclick="showDataRequest('update')">Update Data</button>
+                </div>
+
+                <div class="privacy-option">
+                    <div>
+                        <h4>Cookie Preferences</h4>
+                        <p>Manage your cookie and tracking preferences</p>
+                    </div>
+                    <button class="gdpr-btn gdpr-settings" onclick="showCookieSettings()">Manage Cookies</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Request Form -->
+    <div id="dataRequestForm" style="display: none;">
+        <div class="container">
+            <div class="data-request-form">
+                <h2 id="requestTitle">Data Request</h2>
+                
+                <div class="privacy-notice">
+                    <h4>Important Information</h4>
+                    <p>We take your privacy seriously. Your request will be processed within 30 days as required by GDPR. You may need to verify your identity before we can process your request.</p>
+                </div>
+
+                <form id="dataForm">
+                    <div class="form-group">
+                        <label for="requestType">Request Type:</label>
+                        <select id="requestType" name="requestType" required>
+                            <option value="">Select Request Type</option>
+                            <option value="download">Download My Data</option>
+                            <option value="delete">Delete My Data</option>
+                            <option value="update">Update My Data</option>
+                            <option value="portability">Data Portability</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reason">Reason for Request:</label>
+                        <textarea id="reason" name="reason" placeholder="Please explain your request in detail..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" required> I confirm that I am the data subject or have authorization to make this request
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Request</button>
+                    <button type="button" class="gdpr-btn gdpr-settings" onclick="hideDataRequest()" style="margin-left: 10px;">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // GDPR Cookie Management System
+        class GDPRManager {
+            constructor() {
+                this.cookiePreferences = {
+                    essential: true,
+                    analytics: false,
+                    marketing: false
+                };
+                this.init();
+            }
+
+            init() {
+                // Check if user has already made a choice
+                const savedPreferences = localStorage.getItem('gdpr_preferences');
+                if (savedPreferences) {
+                    this.cookiePreferences = JSON.parse(savedPreferences);
+                    this.applyCookiePreferences();
+                } else {
+                    // Show banner after 2 seconds
+                    setTimeout(() => {
+                        document.getElementById('gdprBanner').classList.add('show');
+                    }, 2000);
+                }
+                
+                this.setupDataRequestForm();
+            }
+
+            acceptAllCookies() {
+                this.cookiePreferences = {
+                    essential: true,
+                    analytics: true,
+                    marketing: true
+                };
+                this.savePreferences();
+                this.hideBanner();
+                this.showNotification('All cookies accepted. Thank you!', 'success');
+            }
+
+            declineAllCookies() {
+                this.cookiePreferences = {
+                    essential: true,
+                    analytics: false,
+                    marketing: false
+                };
+                this.savePreferences();
+                this.hideBanner();
+                this.showNotification('Only essential cookies will be used.', 'info');
+            }
+
+            savePreferences() {
+                localStorage.setItem('gdpr_preferences', JSON.stringify(this.cookiePreferences));
+                localStorage.setItem('gdpr_consent_date', new Date().toISOString());
+                this.applyCookiePreferences();
+            }
+
+            applyCookiePreferences() {
+                // Apply analytics tracking
+                if (this.cookiePreferences.analytics) {
+                    this.enableAnalytics();
+                } else {
+                    this.disableAnalytics();
+                }
+
+                // Apply marketing cookies
+                if (this.cookiePreferences.marketing) {
+                    this.enableMarketing();
+                } else {
+                    this.disableMarketing();
+                }
+
+                // Log processing activity (GDPR requirement)
+                this.logProcessingActivity('Cookie preferences applied', this.cookiePreferences);
+            }
+
+            enableAnalytics() {
+                // Example: Google Analytics
+                console.log('Analytics enabled');
+                // gtag('config', 'GA_MEASUREMENT_ID');
+            }
+
+            disableAnalytics() {
+                console.log('Analytics disabled');
+                // window['ga-disable-GA_MEASUREMENT_ID'] = true;
+            }
+
+            enableMarketing() {
+                console.log('Marketing cookies enabled');
+            }
+
+            disableMarketing() {
+                console.log('Marketing cookies disabled');
+            }
+
+            hideBanner() {
+                document.getElementById('gdprBanner').classList.remove('show');
+            }
+
+            showNotification(message, type) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? '#27ae60' : '#3498db'};
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    z-index: 1002;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            logProcessingActivity(activity, data) {
+                const log = {
+                    timestamp: new Date().toISOString(),
+                    activity: activity,
+                    data: data,
+                    userAgent: navigator.userAgent,
+                    ipAddress: 'logged_server_side' // Should be logged server-side
+                };
+                
+                // In production, send to server
+                console.log('GDPR Activity Log:', log);
+                
+                // Store locally for demo
+                let logs = JSON.parse(localStorage.getItem('gdpr_logs') || '[]');
+                logs.push(log);
+                // Keep only last 100 logs
+                if (logs.length > 100) logs = logs.slice(-100);
+                localStorage.setItem('gdpr_logs', JSON.stringify(logs));
+            }
+
+            setupDataRequestForm() {
+                const form = document.getElementById('dataForm');
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleDataRequest(new FormData(form));
+                    });
+                }
+            }
+
+            handleDataRequest(formData) {
+                const requestData = {
+                    type: formData.get('requestType'),
+                    email: formData.get('email'),
+                    fullName: formData.get('fullName'),
+                    reason: formData.get('reason'),
+                    timestamp: new Date().toISOString(),
+                    status: 'pending'
+                };
+
+                // Log the request
+                this.logProcessingActivity('Data request submitted', requestData);
+
+                // In production, send to server
+                console.log('Data Request:', requestData);
+
+                // Show confirmation
+                alert(`Your ${requestData.type} request has been submitted. We will respond within 30 days as required by GDPR.`);
+                
+                // Hide form
+                document.getElementById('dataRequestForm').style.display = 'none';
+            }
+        }
+
+        // Initialize GDPR Manager
+        const gdprManager = new GDPRManager();
+
+        // Global functions for UI interaction
+        function acceptAllCookies() {
+            gdprManager.acceptAllCookies();
+        }
+
+        function declineAllCookies() {
+            gdprManager.declineAllCookies();
+        }
+
+        function showCookieSettings() {
+            document.getElementById('privacyModal').classList.add('show');
+            
+            // Update toggle states
+            const analyticsToggle = document.getElementById('analyticsToggle');
+            const marketingToggle = document.getElementById('marketingToggle');
+            
+            if (gdprManager.cookiePreferences.analytics) {
+                analyticsToggle.classList.add('active');
+            }
+            if (gdprManager.cookiePreferences.marketing) {
+                marketingToggle.classList.add('active');
+            }
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').classList.remove('show');
+        }
+
+        function toggleCookieType(type) {
+            const toggle = document.getElementById(type + 'Toggle');
+            const isActive = toggle.classList.contains('active');
+            
+            if (isActive) {
+                toggle.classList.remove('active');
+                gdprManager.cookiePreferences[type] = false;
+            } else {
+                toggle.classList.add('active');
+                gdprManager.cookiePreferences[type] = true;
+            }
+        }
+
+        function savePrivacySettings() {
+            gdprManager.savePreferences();
+            closePrivacyModal();
+            gdprManager.hideBanner();
+            gdprManager.showNotification('Privacy settings saved successfully!', 'success');
+        }
+
+        function showPrivacyDashboard() {
+            // Hide other sections
+            document.getElementById('dataRequestForm').style.display = 'none';
+            
+            // Show privacy dashboard
+            const dashboard = document.getElementById('privacyDashboard');
+            dashboard.style.display = dashboard.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showDataRequest(type) {
+            document.getElementById('privacyDashboard').style.display = 'none';
+            document.getElementById('dataRequestForm').style.display = 'block';
+            
+            // Update form title and request type
+            const titles = {
+                download: 'Download Your Data',
+                delete: 'Delete Your Data',
+                update: 'Update Your Data'
+            };
+            
+            document.getElementById('requestTitle').textContent = titles[type] || 'Data Request';
+            document.getElementById('requestType').value = type;
+        }
+
+        function hideDataRequest() {
+            document.getElementById('dataRequestForm').style.display = 'none';
+        }
+
+        // File processing monitoring for GDPR compliance
+        function trackFileProcessing(fileName, fileType, operation) {
+            gdprManager.logProcessingActivity('File processed', {
+                fileName: fileName,
+                fileType: fileType,
+                operation: operation,
+                processingBasis: 'legitimate_interest',
+                dataRetention: '24_hours'
+            });
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('privacyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePrivacyModal();
+            }
+        });
+    </script>
+</body>
+</html>

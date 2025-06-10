@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert PDF to PowerPoint Online Free | PDF to PPT PPTX | SmartConverter</title>
+    <meta name="description" content="Convert PDF files to PowerPoint presentations (PPT, PPTX) online for free. Transform PDFs into editable presentation slides." />
+    <meta name="keywords" content="PDF to PowerPoint, PDF to PPT, PDF to PPTX, convert PDF to presentation, free PDF converter" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/pdf-to-powerpoint.html" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        /* Missing CSS classes for the converter */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+        .converter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .upload-area {
+            border: 2px dashed #e2e8f0;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: #3b82f6;
+            background: #f0f9ff;
+        }
+        
+        .upload-area.dragover {
+            border-color: #3b82f6;
+            background: #dbeafe;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px;
+            color: #64748b;
+        }
+        
+        .progress-container {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .slides-preview {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .slide-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+        }
+        
+        .slide-canvas {
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        
+        .conversion-options {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .option-group {
+            margin-bottom: 15px;
+        }
+        
+        .status-message {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .status-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .status-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        
+        .status-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Utility classes that might be missing */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+        }
+        
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-3 { margin-bottom: 12px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mt-2 { margin-top: 8px; }
+        .mt-3 { margin-top: 12px; }
+        .mt-4 { margin-top: 16px; }
+        .hidden { display: none; }
+        .block { display: block; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .gap-2 { gap: 8px; }
+        .gap-3 { gap: 12px; }
+        .w-full { width: 100%; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .text-sm { font-size: 14px; }
+        .text-lg { font-size: 18px; }
+        .text-xl { font-size: 20px; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-700 { color: #374151; }
+        .text-blue-600 { color: #2563eb; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="converter-container">
+        <h1 class="text-xl font-semibold text-center mb-4">PDF to PowerPoint Converter</h1>
+        
+        <!-- Upload Area -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                </svg>
+            </div>
+            <p class="text-lg font-medium mb-2">Drop your PDF file here</p>
+            <p class="text-gray-600 mb-3">or click to browse</p>
+            <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                Choose PDF File
+            </button>
+            <input type="file" id="fileInput" class="file-input" accept=".pdf">
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progressContainer">
+            <p class="text-sm text-gray-700 mb-2">Processing PDF...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="text-sm text-gray-600 mt-2" id="progressText">0%</p>
+        </div>
+
+        <!-- Conversion Options -->
+        <div class="conversion-options" id="conversionOptions">
+            <h3 class="font-semibold mb-3">Conversion Options</h3>
+            
+            <div class="option-group">
+                <label class="font-medium text-gray-700">Slide Layout:</label>
+                <select id="slideLayout" class="w-full mt-2 p-2 border border-gray-300 rounded">
+                    <option value="standard">Standard (4:3)</option>
+                    <option value="widescreen">Widescreen (16:9)</option>
+                    <option value="custom">Custom Size</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label class="font-medium text-gray-700">Image Quality:</label>
+                <select id="imageQuality" class="w-full mt-2 p-2 border border-gray-300 rounded">
+                    <option value="high">High Quality</option>
+                    <option value="medium">Medium Quality</option>
+                    <option value="low">Low Quality (Smaller File)</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label class="flex items-center gap-2">
+                    <input type="checkbox" id="includeText" checked>
+                    <span class="font-medium text-gray-700">Extract and include text</span>
+                </label>
+            </div>
+
+            <div class="flex gap-3 mt-4">
+                <button class="btn btn-success" id="convertBtn">
+                    Convert to PowerPoint
+                </button>
+                <button class="btn btn-secondary" id="resetBtn">
+                    Reset
+                </button>
+            </div>
+        </div>
+
+        <!-- Slides Preview -->
+        <div class="slides-preview" id="slidesPreview">
+            <h3 class="font-semibold mb-3">PDF Pages Preview</h3>
+            <div id="slidesContainer"></div>
+        </div>
+
+        <!-- Status Messages -->
+        <div class="status-message" id="statusMessage"></div>
+    </div>
+
+    <script>
+        class PDFToPowerPointConverter {
+            constructor() {
+                this.pdfDoc = null;
+                this.pages = [];
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const uploadArea = document.getElementById('uploadArea');
+                const fileInput = document.getElementById('fileInput');
+                const convertBtn = document.getElementById('convertBtn');
+                const resetBtn = document.getElementById('resetBtn');
+
+                // Drag and drop handlers
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        this.handleFileSelect(files[0]);
+                    }
+                });
+
+                uploadArea.addEventListener('click', () => {
+                    fileInput.click();
+                });
+
+                fileInput.addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) {
+                        this.handleFileSelect(e.target.files[0]);
+                    }
+                });
+
+                convertBtn.addEventListener('click', () => {
+                    this.convertToPowerPoint();
+                });
+
+                resetBtn.addEventListener('click', () => {
+                    this.reset();
+                });
+            }
+
+            async handleFileSelect(file) {
+                if (file.type !== 'application/pdf') {
+                    this.showStatus('Please select a valid PDF file.', 'error');
+                    return;
+                }
+
+                try {
+                    this.showProgress(true);
+                    this.updateProgress(10, 'Loading PDF...');
+
+                    const arrayBuffer = await file.arrayBuffer();
+                    this.pdfDoc = await pdfjsLib.getDocument(arrayBuffer).promise;
+                    
+                    this.updateProgress(50, 'Processing pages...');
+                    await this.processPDFPages();
+                    
+                    this.updateProgress(100, 'Complete!');
+                    this.showConversionOptions();
+                    this.showSlidesPreview();
+                    
+                    setTimeout(() => {
+                        this.showProgress(false);
+                    }, 1000);
+
+                } catch (error) {
+                    console.error('Error processing PDF:', error);
+                    this.showStatus('Error processing PDF file. Please try again.', 'error');
+                    this.showProgress(false);
+                }
+            }
+
+            async processPDFPages() {
+                this.pages = [];
+                const numPages = this.pdfDoc.numPages;
+
+                for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+                    const page = await this.pdfDoc.getPage(pageNum);
+                    const viewport = page.getViewport({ scale: 1.5 });
+                    
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    await page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    }).promise;
+
+                    // Extract text content
+                    const textContent = await page.getTextContent();
+                    const textItems = textContent.items.map(item => item.str).join(' ');
+
+                    this.pages.push({
+                        canvas: canvas,
+                        text: textItems,
+                        pageNumber: pageNum
+                    });
+
+                    this.updateProgress(50 + (pageNum / numPages) * 40, `Processing page ${pageNum} of ${numPages}...`);
+                }
+            }
+
+            showSlidesPreview() {
+                const container = document.getElementById('slidesContainer');
+                const preview = document.getElementById('slidesPreview');
+                
+                container.innerHTML = '';
+                
+                this.pages.forEach((page, index) => {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = 'slide-item';
+                    
+                    const canvas = page.canvas.cloneNode();
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(page.canvas, 0, 0);
+                    canvas.className = 'slide-canvas';
+                    
+                    slideDiv.innerHTML = `
+                        <h4 class="font-medium mb-2">Slide ${index + 1}</h4>
+                        <div class="flex gap-3">
+                            <div style="flex-shrink: 0;"></div>
+                            <div>
+                                <p class="text-sm text-gray-600">
+                                    ${page.text.substring(0, 150)}${page.text.length > 150 ? '...' : ''}
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    slideDiv.querySelector('div').prepend(canvas);
+                    container.appendChild(slideDiv);
+                });
+                
+                preview.style.display = 'block';
+            }
+
+            async convertToPowerPoint() {
+                try {
+                    this.showStatus('Converting to PowerPoint...', 'info');
+                    
+                    // Create a simple PPTX structure using JSZip
+                    const zip = new JSZip();
+                    
+                    // Add basic PPTX structure
+                    this.createPPTXStructure(zip);
+                    
+                    // Add slides
+                    await this.addSlidesToPPTX(zip);
+                    
+                    // Generate the file
+                    const content = await zip.generateAsync({ type: 'blob' });
+                    
+                    // Download the file
+                    const url = URL.createObjectURL(content);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'converted-presentation.pptx';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    this.showStatus('PowerPoint file downloaded successfully!', 'success');
+                    
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    this.showStatus('Error during conversion. Please try again.', 'error');
+                }
+            }
+
+            createPPTXStructure(zip) {
+                // Basic PPTX file structure
+                zip.file('[Content_Types].xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+    <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+    <Default Extension="xml" ContentType="application/xml"/>
+    <Default Extension="png" ContentType="image/png"/>
+    <Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-presentationml.presentation.main+xml"/>
+    <Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="application/vnd.openxmlformats-presentationml.slideMaster+xml"/>
+    <Override PartName="/ppt/slideLayouts/slideLayout1.xml" ContentType="application/vnd.openxmlformats-presentationml.slideLayout+xml"/>
+</Types>`);
+
+                zip.folder('_rels').file('.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+    <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/>
+</Relationships>`);
+
+                // Add more PPTX structure files as needed
+                this.addPresentationXML(zip);
+            }
+
+            addPresentationXML(zip) {
+                const slideRels = this.pages.map((_, index) => 
+                    `<Relationship Id="rId${index + 2}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide${index + 1}.xml"/>`
+                ).join('\n    ');
+
+                zip.file('ppt/presentation.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:presentation xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+    <p:sldMasterIdLst>
+        <p:sldMasterId id="2147483648" r:id="rId1"/>
+    </p:sldMasterIdLst>
+    <p:sldIdLst>
+        ${this.pages.map((_, index) => `<p:sldId id="${2147483649 + index}" r:id="rId${index + 2}"/>`).join('\n        ')}
+    </p:sldIdLst>
+    <p:sldSz cx="9144000" cy="6858000"/>
+</p:presentation>`);
+
+                zip.folder('ppt/_rels').file('presentation.xml.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+    <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="slideMasters/slideMaster1.xml"/>
+    ${slideRels}
+</Relationships>`);
+            }
+
+            async addSlidesToPPTX(zip) {
+                const slidesFolder = zip.folder('ppt/slides');
+                const slideRelsFolder = zip.folder('ppt/slides/_rels');
+                const mediaFolder = zip.folder('ppt/media');
+
+                for (let i = 0; i < this.pages.length; i++) {
+                    const page = this.pages[i];
+                    const slideNum = i + 1;
+                    
+                    // Convert canvas to blob
+                    const canvas = page.canvas;
+                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                    const imageData = await blob.arrayBuffer();
+                    
+                    // Add image to media folder
+                    mediaFolder.file(`image${slideNum}.png`, imageData);
+                    
+                    // Create slide XML
+                    const slideXML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+    <p:cSld>
+        <p:spTree>
+            <p:nvGrpSpPr>
+                <p:cNvPr id="1" name=""/>
+                <p:cNvGrpSpPr/>
+                <p:nvPr/>
+            </p:nvGrpSpPr>
+            <p:grpSpPr>
+                <a:xfrm xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                    <a:off x="0" y="0"/>
+                    <a:ext cx="0" cy="0"/>
+                    <a:chOff x="0" y="0"/>
+                    <a:chExt cx="0" cy="0"/>
+                </a:xfrm>
+            </p:grpSpPr>
+            <p:pic>
+                <p:nvPicPr>
+                    <p:cNvPr id="2" name="Picture ${slideNum}"/>
+                    <p:cNvPicPr/>
+                    <p:nvPr/>
+                </p:nvPicPr>
+                <p:blipFill>
+                    <a:blip xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" r:embed="rId1"/>
+                    <a:stretch>
+                        <a:fillRect/>
+                    </a:stretch>
+                </p:blipFill>
+                <p:spPr>
+                    <a:xfrm xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:off x="0" y="0"/>
+                        <a:ext cx="9144000" cy="6858000"/>
+                    </a:xfrm>
+                    <a:prstGeom prst="rect">
+                        <a:avLst/>
+                    </a:prstGeom>
+                </p:spPr>
+            </p:pic>
+        </p:spTree>
+    </p:cSld>
+</p:sld>`;
+                    
+                    slidesFolder.file(`slide${slideNum}.xml`, slideXML);
+                    
+                    // Create slide relationships
+                    slideRelsFolder.file(`slide${slideNum}.xml.rels`, `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+    <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/image${slideNum}.png"/>
+</Relationships>`);
+                }
+            }
+
+            showConversionOptions() {
+                document.getElementById('conversionOptions').style.display = 'block';
+            }
+
+            showProgress(show) {
+                document.getElementById('progressContainer').style.display = show ? 'block' : 'none';
+            }
+
+            updateProgress(percent, text) {
+                document.getElementById('progressFill').style.width = percent + '%';
+                document.getElementById('progressText').textContent = text;
+            }
+
+            showStatus(message, type) {
+                const statusEl = document.getElementById('statusMessage');
+                statusEl.textContent = message;
+                statusEl.className = `status-message status-${type}`;
+                statusEl.style.display = 'block';
+                
+                if (type === 'success') {
+                    setTimeout(() => {
+                        statusEl.style.display = 'none';
+                    }, 5000);
+                }
+            }
+
+            reset() {
+                this.pdfDoc = null;
+                this.pages = [];
+                document.getElementById('fileInput').value = '';
+                document.getElementById('conversionOptions').style.display = 'none';
+                document.getElementById('slidesPreview').style.display = 'none';
+                document.getElementById('statusMessage').style.display = 'none';
+                this.showProgress(false);
+            }
+        }
+
+        // Initialize the converter when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new PDFToPowerPointConverter();
+        });
+    </script>
+</body>
+</html>

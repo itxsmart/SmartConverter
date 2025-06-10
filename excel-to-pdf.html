@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Excel to PDF Online Free | XLS XLSX to PDF | SmartConverter</title>
+    <meta name="description" content="Convert Excel spreadsheets (XLS, XLSX) to PDF format online for free. Preserve formatting and formulas. Fast Excel to PDF converter with no limits." />
+    <meta name="keywords" content="Excel to PDF, convert Excel to PDF, XLS to PDF, XLSX to PDF, free Excel converter, spreadsheet to PDF" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/excel-to-pdf.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* Missing CSS classes for Excel to PDF converter */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+        .worksheet-selector {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .worksheet-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .worksheet-item {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .worksheet-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .worksheet-item.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .worksheet-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .worksheet-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .pdf-options {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .orientation-selector {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .orientation-option {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .orientation-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .orientation-option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .page-size-selector {
+            margin-top: 20px;
+        }
+
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .size-option {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            font-weight: 600;
+        }
+
+        .size-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .size-option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .excel-preview {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .excel-table th,
+        .excel-table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .excel-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .excel-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .conversion-progress {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .step-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #ddd;
+            z-index: -1;
+        }
+
+        .progress-step:last-child::after {
+            display: none;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .step-circle.active {
+            background: #667eea;
+        }
+
+        .step-circle.completed {
+            background: #28a745;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <div class="tool-icon">
+                <i class="fas fa-file-excel"></i>
+            </div>
+            <h1>Excel to PDF Converter</h1>
+            <p>Convert your Excel files to PDF format with customizable options</p>
+        </div>
+
+        <div class="main-card">
+            <!-- File Upload Zone -->
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Drop Excel files here or click to browse</h3>
+                    <p>Supports .xlsx, .xls files up to 50MB</p>
+                </div>
+                <input type="file" id="fileInput" accept=".xlsx,.xls" multiple style="display: none;">
+            </div>
+
+            <!-- File List -->
+            <div class="file-list" id="fileList" style="display: none;">
+                <h3>Selected Files</h3>
+                <div id="filesContainer"></div>
+            </div>
+
+            <!-- Worksheet Selector -->
+            <div class="worksheet-selector" id="worksheetSelector" style="display: none;">
+                <h3><i class="fas fa-table"></i> Select Worksheets</h3>
+                <p>Choose which worksheets to convert to PDF</p>
+                <div class="worksheet-list" id="worksheetList"></div>
+            </div>
+
+            <!-- Excel Preview -->
+            <div class="excel-preview" id="excelPreview" style="display: none;">
+                <h3><i class="fas fa-eye"></i> Preview</h3>
+                <div class="table-container">
+                    <table class="excel-table" id="previewTable"></table>
+                </div>
+            </div>
+
+            <!-- PDF Options -->
+            <div class="pdf-options" id="pdfOptions" style="display: none;">
+                <h3><i class="fas fa-cog"></i> PDF Options</h3>
+                
+                <div class="option-card">
+                    <h4>Page Orientation</h4>
+                    <div class="orientation-selector">
+                        <div class="orientation-option selected" data-orientation="portrait">
+                            <i class="fas fa-mobile-alt fa-2x"></i>
+                            <div>Portrait</div>
+                        </div>
+                        <div class="orientation-option" data-orientation="landscape">
+                            <i class="fas fa-mobile-alt fa-2x fa-rotate-90"></i>
+                            <div>Landscape</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-size-selector">
+                    <h4>Page Size</h4>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="a4">A4</div>
+                        <div class="size-option" data-size="letter">Letter</div>
+                        <div class="size-option" data-size="legal">Legal</div>
+                        <div class="size-option" data-size="a3">A3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversion Progress -->
+            <div class="conversion-progress" id="conversionProgress">
+                <h3><i class="fas fa-cogs"></i> Converting to PDF</h3>
+                <div class="step-progress">
+                    <div class="progress-step">
+                        <div class="step-circle" id="step1">1</div>
+                        <div class="step-label">Reading Excel</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle" id="step2">2</div>
+                        <div class="step-label">Processing Data</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle" id="step3">3</div>
+                        <div class="step-label">Generating PDF</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle" id="step4">4</div>
+                        <div class="step-label">Download Ready</div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <button class="btn btn-primary" id="convertBtn">
+                    <i class="fas fa-file-pdf"></i> Convert to PDF
+                </button>
+                <button class="btn btn-secondary" id="resetBtn">
+                    <i class="fas fa-redo"></i> Start Over
+                </button>
+            </div>
+
+            <!-- Result Card -->
+            <div class="result-card" id="resultCard">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Conversion Complete!</h3>
+                <p>Your Excel file has been successfully converted to PDF</p>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="btn btn-secondary" id="convertAnotherBtn">
+                        <i class="fas fa-plus"></i> Convert Another
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-note">
+            <i class="fas fa-shield-alt"></i>
+            Your files are processed locally in your browser. No data is sent to any server.
+        </div>
+    </div>
+
+    <script>
+        let selectedFiles = [];
+        let currentWorkbook = null;
+        let selectedWorksheets = [];
+        let pdfOptions = {
+            orientation: 'portrait',
+            pageSize: 'a4'
+        };
+
+        // DOM Elements
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const filesContainer = document.getElementById('filesContainer');
+        const worksheetSelector = document.getElementById('worksheetSelector');
+        const worksheetList = document.getElementById('worksheetList');
+        const excelPreview = document.getElementById('excelPreview');
+        const previewTable = document.getElementById('previewTable');
+        const pdfOptionsDiv = document.getElementById('pdfOptions');
+        const actionButtons = document.getElementById('actionButtons');
+        const convertBtn = document.getElementById('convertBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const conversionProgress = document.getElementById('conversionProgress');
+        const resultCard = document.getElementById('resultCard');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const convertAnotherBtn = document.getElementById('convertAnotherBtn');
+
+        // Event Listeners
+        uploadZone.addEventListener('click', () => fileInput.click());
+        uploadZone.addEventListener('dragover', handleDragOver);
+        uploadZone.addEventListener('drop', handleDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+        convertBtn.addEventListener('click', convertToPDF);
+        resetBtn.addEventListener('click', resetApp);
+        convertAnotherBtn.addEventListener('click', resetApp);
+
+        // PDF Options Event Listeners
+        document.querySelectorAll('.orientation-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.orientation-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                pdfOptions.orientation = this.dataset.orientation;
+            });
+        });
+
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.size-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                pdfOptions.pageSize = this.dataset.size;
+            });
+        });
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => 
+                file.type.includes('sheet') || file.name.endsWith('.xlsx') || file.name.endsWith('.xls')
+            );
+            processFiles(files);
+        }
+
+        function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            processFiles(files);
+        }
+
+        function processFiles(files) {
+            selectedFiles = files;
+            displayFiles();
+            if (files.length > 0) {
+                loadExcelFile(files[0]);
+            }
+        }
+
+        function displayFiles() {
+            if (selectedFiles.length === 0) return;
+
+            fileList.style.display = 'block';
+            filesContainer.innerHTML = '';
+
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <i class="fas fa-file-excel file-icon"></i>
+                        <div class="file-details">
+                            <h4>${file.name}</h4>
+                            <p>${formatFileSize(file.size)} • Excel File</p>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn btn-danger" onclick="removeFile(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                filesContainer.appendChild(fileItem);
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            if (selectedFiles.length === 0) {
+                fileList.style.display = 'none';
+                worksheetSelector.style.display = 'none';
+                excelPreview.style.display = 'none';
+                pdfOptionsDiv.style.display = 'none';
+                actionButtons.style.display = 'none';
+            } else {
+                displayFiles();
+                loadExcelFile(selectedFiles[0]);
+            }
+        }
+
+        function loadExcelFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    currentWorkbook = XLSX.read(data, { type: 'array' });
+                    displayWorksheets();
+                } catch (error) {
+                    alert('Error reading Excel file: ' + error.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function displayWorksheets() {
+            if (!currentWorkbook) return;
+
+            worksheetSelector.style.display = 'block';
+            worksheetList.innerHTML = '';
+            selectedWorksheets = [];
+
+            currentWorkbook.SheetNames.forEach((sheetName, index) => {
+                const worksheet = currentWorkbook.Sheets[sheetName];
+                const range = XLSX.utils.decode_range(worksheet['!ref'] || 'A1:A1');
+                const rowCount = range.e.r - range.s.r + 1;
+                const colCount = range.e.c - range.s.c + 1;
+
+                const worksheetItem = document.createElement('div');
+                worksheetItem.className = 'worksheet-item';
+                worksheetItem.innerHTML = `
+                    <div class="worksheet-name">${sheetName}</div>
+                    <div class="worksheet-info">${rowCount} rows × ${colCount} columns</div>
+                `;
+
+                worksheetItem.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                    if (this.classList.contains('selected')) {
+                        selectedWorksheets.push(sheetName);
+                    } else {
+                        selectedWorksheets = selectedWorksheets.filter(name => name !== sheetName);
+                    }
+                    
+                    if (selectedWorksheets.length > 0) {
+                        previewWorksheet(selectedWorksheets[0]);
+                        pdfOptionsDiv.style.display = 'block';
+                        actionButtons.style.display = 'flex';
+                    } else {
+                        excelPreview.style.display = 'none';
+                        pdfOptionsDiv.style.display = 'none';
+                        actionButtons.style.display = 'none';
+                    }
+                });
+
+                worksheetList.appendChild(worksheetItem);
+            });
+        }
+
+        function previewWorksheet(sheetName) {
+            if (!currentWorkbook || !currentWorkbook.Sheets[sheetName]) return;
+
+            const worksheet = currentWorkbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+            excelPreview.style.display = 'block';
+            previewTable.innerHTML = '';
+
+            if (jsonData.length > 0) {
+                // Create header
+                const headerRow = document.createElement('tr');
+                const maxCols = Math.max(...jsonData.map(row => row.length));
+                
+                for (let i = 0; i < maxCols; i++) {
+                    const th = document.createElement('th');
+                    th.textContent = jsonData[0][i] || `Column ${i + 1}`;
+                    headerRow.appendChild(th);
+                }
+                previewTable.appendChild(headerRow);
+
+                // Create rows (limit to first 20 rows for preview)
+                const previewRows = jsonData.slice(1, 21);
+                previewRows.forEach(row => {
+                    const tr = document.createElement('tr');
+                    for (let i = 0; i < maxCols; i++) {
+                        const td = document.createElement('td');
+                        td.textContent = row[i] || '';
+                        tr.appendChild(td);
+                    }
+                    previewTable.appendChild(tr);
+                });
+
+                if (jsonData.length > 21) {
+                    const tr = document.createElement('tr');
+                    const td = document.createElement('td');
+                    td.colSpan = maxCols;
+                    td.style.textAlign = 'center';
+                    td.style.fontStyle = 'italic';
+                    td.style.color = '#666';
+                    td.textContent = `... and ${jsonData.length - 21} more rows`;
+                    tr.appendChild(td);
+                    previewTable.appendChild(tr);
+                }
+            }
+        }
+
+        async function convertToPDF() {
+            if (selectedWorksheets.length === 0) {
+                alert('Please select at least one worksheet to convert');
+                return;
+            }
+
+            conversionProgress.style.display = 'block';
+            actionButtons.style.display = 'none';
+
+            try {
+                // Step 1: Reading Excel
+                updateProgress(1, 25, 'Reading Excel file...');
+                await sleep(500);
+
+                // Step 2: Processing Data  
+                updateProgress(2, 50, 'Processing worksheet data...');
+                await sleep(500);
+
+                // Step 3: Generating PDF
+                updateProgress(3, 75, 'Generating PDF document...');
+                await sleep(500);
+
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: pdfOptions.orientation,
+                    unit: 'mm',
+                    format: pdfOptions.pageSize
+                });
+
+                let isFirstSheet = true;
+
+                for (const sheetName of selectedWorksheets) {
+                    if (!isFirstSheet) {
+                        pdf.addPage();
+                    }
+                    
+                    const worksheet = currentWorkbook.Sheets[sheetName];
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    
+                    if (jsonData.length > 0) {
+                        // Add sheet title
+                        pdf.setFontSize(16);
+                        pdf.setFont(undefined, 'bold');
+                        pdf.text(sheetName, 20, 20);
+                        
+                        // Prepare table data
+                        const headers = jsonData[0] || [];
+                        const rows = jsonData.slice(1);
+                        
+                        // Use autoTable for better formatting
+                        pdf.autoTable({
+                            head: [headers],
+                            body: rows,
+                            startY: 30,
+                            styles: { fontSize: 8 },
+                            headStyles: { fillColor: [102, 126, 234] },
+                            margin: { top: 30 }
+                        });
+                    }
+                    
+                    isFirstSheet = false;
+                }
+
+                // Step 4: Download Ready
+                updateProgress(4, 100, 'Conversion complete!');
+                await sleep(500);
+
+                const fileName = selectedFiles[0].name.replace(/\.[^/.]+$/, '') + '.pdf';
+                pdf.save(fileName);
+
+                conversionProgress.style.display = 'none';
+                resultCard.style.display = 'block';
+
+                // Store PDF for download button
+                window.convertedPDF = pdf;
+                window.convertedFileName = fileName;
+
+            } catch (error) {
+                console.error('Conversion error:', error);
+                alert('Error during conversion: ' + error.message);
+                conversionProgress.style.display = 'none';
+                actionButtons.style.display = 'flex';
+            }
+        }
+
+        function updateProgress(step, percentage, text) {
+            // Update step circles
+            for (let i = 1; i <= 4; i++) {
+                const stepCircle = document.getElementById(`step${i}`);
+                if (i < step) {
+                    stepCircle.className = 'step-circle completed';
+                    stepCircle.innerHTML = '<i class="fas fa-check"></i>';
+                } else if (i === step) {
+                    stepCircle.className = 'step-circle active';
+                    stepCircle.textContent = i;
+                } else {
+                    stepCircle.className = 'step-circle';
+                    stepCircle.textContent = i;
+                }
+            }
+
+            // Update progress bar
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = text;
+        }
+
+        function resetApp() {
+            selectedFiles = [];
+            currentWorkbook = null;
+            selectedWorksheets = [];
+            
+            fileList.style.display = 'none';
+            worksheetSelector.style.display = 'none';
+            excelPreview.style.display = 'none';
+            pdfOptionsDiv.style.display = 'none';
+            actionButtons.style.display = 'none';
+            conversionProgress.style.display = 'none';
+            resultCard.style.display = 'none';
+            
+            fileInput.value = '';
+        }
+
+        // Download button functionality
+        downloadBtn.addEventListener('click', function() {
+            if (window.convertedPDF && window.convertedFileName) {
+                window.convertedPDF.save(window.convertedFileName);
+            }
+        });
+
+        // Utility functions
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+</body>
+</html>

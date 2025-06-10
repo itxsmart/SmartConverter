@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartConverter | Free Online PDF Tools & Converters</title>
+    <meta name="description" content="Free online PDF tools and converters. Convert, compress, merge, split, and edit PDF files. Excel to PDF, Word to PDF, JPG to PDF, and more." />
+    <meta name="keywords" content="PDF tools, PDF converter, online PDF tools, free PDF converter, PDF editor, SmartConverter" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/" />
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .cta-btn {
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .primary-btn {
+            background-color: white;
+            color: #3498db;
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Tools Section */
+        .tools-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .tool-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .tool-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-color: #4a6ee0;
+    }
+    
+    .tool-card h3 {
+        margin-top: 0;
+        color: #2c3e50;
+        font-size: 18px;
+    }
+    
+    .tool-card p {
+        margin-bottom: 0;
+        color: #7f8c8d;
+        font-size: 14px;
+    }
+    
+    .tool-card i {
+        margin-right: 10px;
+        color: #4a6ee0;
+    }
+        
+        .category-title {
+            grid-column: 1 / -1;
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: #f0f4f8;
+            padding: 60px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .auth-buttons {
+                margin-top: 15px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Your Complete PDF Solution</h1>
+            <p>Edit, convert, merge, split, compress and secure PDF files with our powerful online tools. Fast, secure and completely free!</p>
+            <div class="cta-buttons">
+                <a href="tools.html" class="cta-btn primary-btn">Start Using Tools</a>
+                <a href="about.html" class="cta-btn secondary-btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tools-section">
+    <div class="container">
+        <h2 class="section-title">All PDF Tools You Need</h2>
+        
+        <div class="tools-grid">
+            <h3 class="category-title">📁 PDF Organization Tools</h3>
+            
+            <a href="merge-pdf.html" class="tool-card">
+                <h3><i class="fas fa-object-group"></i> Merge PDF</h3>
+                <p>Combine multiple PDF files into one document in seconds</p>
+            </a>
+            
+            <a href="split-pdf.html" class="tool-card">
+                <h3><i class="fas fa-cut"></i> Split PDF</h3>
+                <p>Divide a PDF into multiple separate files</p>
+            </a>
+            
+            <a href="extract-pages.html" class="tool-card">
+                <h3><i class="fas fa-file-export"></i> Extract Pages</h3>
+                <p>Extract specific pages from a PDF document</p>
+            </a>
+            
+            <a href="delete-pages.html" class="tool-card">
+                <h3><i class="fas fa-trash-alt"></i> Delete Pages</h3>
+                <p>Remove unwanted pages from your PDF</p>
+            </a>
+            
+            <a href="organize-pages.html" class="tool-card">
+                <h3><i class="fas fa-sort"></i> Organize Pages</h3>
+                <p>Rearrange PDF pages in any order you want</p>
+            </a>
+            
+            <h3 class="category-title">🔄 PDF Conversion Tools</h3>
+            
+            <a href="pdf-to-word.html" class="tool-card">
+                <h3><i class="fas fa-file-word"></i> PDF to Word</h3>
+                <p>Convert PDF to editable Microsoft Word documents</p>
+            </a>
+            
+            <a href="pdf-to-excel.html" class="tool-card">
+                <h3><i class="fas fa-file-excel"></i> PDF to Excel</h3>
+                <p>Extract tables from PDF to Excel spreadsheets</p>
+            </a>
+            
+            <a href="pdf-to-powerpoint.html" class="tool-card">
+                <h3><i class="fas fa-file-powerpoint"></i> PDF to PowerPoint</h3>
+                <p>Convert PDF to editable PowerPoint presentations</p>
+            </a>
+            
+            <a href="pdf-to-jpg.html" class="tool-card">
+                <h3><i class="fas fa-image"></i> PDF to JPG</h3>
+                <p>Convert PDF pages to high-quality JPG images</p>
+            </a>
+            
+            <a href="word-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-file-pdf"></i> Word to PDF</h3>
+                <p>Convert Word documents to PDF format</p>
+            </a>
+            
+            <a href="excel-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-file-pdf"></i> Excel to PDF</h3>
+                <p>Convert Excel spreadsheets to PDF format</p>
+            </a>
+            
+            <a href="ppt-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-file-pdf"></i> PPT to PDF</h3>
+                <p>Convert PowerPoint to PDF documents</p>
+            </a>
+            
+            <a href="jpg-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-file-pdf"></i> JPG to PDF</h3>
+                <p>Convert images to PDF documents</p>
+            </a>
+            
+            <a href="pdf-to-markdown.html" class="tool-card">
+                <h3><i class="fas fa-file-alt"></i> PDF to Markdown</h3>
+                <p>Convert PDF to Markdown formatted text</p>
+            </a>
+            
+            <h3 class="category-title">📉 PDF Optimization Tools</h3>
+            
+             <a href="pdf_generator.html" class="tool-card">
+                <h3><i class="fas fa-compress-alt"></i>PDF Generator</h3>
+                <p>Generate pdf yourself without any hassle</p>
+            </a>
+
+            <a href="compress-pdf.html" class="tool-card">
+                <h3><i class="fas fa-compress-alt"></i> Compress PDF</h3>
+                <p>Reduce PDF file size without losing quality</p>
+            </a>
+            
+            <a href="repair-pdf.html" class="tool-card">
+                <h3><i class="fas fa-wrench"></i> Repair PDF</h3>
+                <p>Fix corrupted or damaged PDF files</p>
+            </a>
+            
+            <a href="ocr-pdf.html" class="tool-card">
+                <h3><i class="fas fa-eye"></i> OCR PDF</h3>
+                <p>Convert scanned documents to searchable text</p>
+            </a>
+            
+            <h3 class="category-title">✏️ PDF Editing Tools</h3>
+            
+            <a href="rotate-pdf.html" class="tool-card">
+                <h3><i class="fas fa-redo"></i> Rotate PDF</h3>
+                <p>Rotate PDF pages to the correct orientation</p>
+            </a>
+    
+            <a href="add-watermark.html" class="tool-card">
+                <h3><i class="fas fa-stamp"></i> Add Watermark</h3>
+                <p>Add text or image watermark to your PDF</p>
+            </a>
+            
+            <a href="crop-pdf.html" class="tool-card">
+                <h3><i class="fas fa-crop"></i> Crop PDF</h3>
+                <p>Crop margins or unwanted areas from PDF pages</p>
+            </a>
+            
+            <a href="redact-pdf.html" class="tool-card">
+                <h3><i class="fas fa-marker"></i> Redact PDF</h3>
+                <p>Permanently remove sensitive information</p>
+            </a>
+            <h3 class="category-title">🧠 Advanced & Specialized Tools</h3>
+            
+            <a href="scan-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-scanner"></i> Scan to PDF</h3>
+                <p>Create PDFs directly from your scanner</p>
+            </a>
+            
+            <a href="html-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-code"></i> HTML to PDF</h3>
+                <p>Convert web pages to PDF documents</p>
+            </a>
+            
+            <a href="webpage-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-globe"></i> Webpage to PDF</h3>
+                <p>Save any webpage as a PDF file</p>
+            </a>
+            
+            <a href="barcode-to-pdf.html" class="tool-card">
+                <h3><i class="fas fa-qrcode"></i> Barcode to PDF</h3>
+                <p>Generate PDFs with barcodes or QR codes or with Numbers</p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Add this CSS to style the clickable tool cards */
+    
+</style>
+    
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our PDF Tools?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Processing</h3>
+                    <p>All files are processed securely in your browser. No documents are uploaded to our servers.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast Processing</h3>
+                    <p>Our tools use advanced algorithms to process your files quickly and efficiently.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock-open"></i>
+                    </div>
+                    <h3>No Watermarks</h3>
+                    <p>Free tools without any annoying watermarks on your documents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Organization Tools</h3>
+                    <ul>
+                        
+                        <li><a href="merge-pdf.html">PDF Merge</a></li>
+                        <li><a href="organize-pages.html">PDF Merge</a></li>
+                        <li><a href="split-pdf.html">PDF Split</a></li>
+                        <li><a href="pdf-to-word.html">PDF To Word</a></li>
+                        <!-- <li><a href="#">Press</a></li> -->
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Most Useful Tools</h3>
+                    <ul>
+                        
+                        <li><a href="pdf-to-word.html">PDF To Word</a></li>
+                        <li><a href="pdf-to-excel.html">PDF To Excel</a></li>
+                        <li><a href="pdf_generator.html">PDF Generator</a></li>
+                        <li><a href="pdf-to-markdown.html">PDF To Markdown</a></li>
+                        <!-- <li><a href="#">Press</a></li> -->
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="cookie.html">Cookie Policy</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <!-- <li><a href="#">GDPR</a></li> -->
+                    </ul>
+                </div>
+                
+                <!-- <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div> -->
+                
+                <!-- <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </div> -->
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 SmartConverter. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

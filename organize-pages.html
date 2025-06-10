@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organize PDF Pages Online Free | Reorder PDF Pages | SmartConverter</title>
+    <meta name="description" content="Organize and reorder PDF pages online for free. Rearrange pages in any order with drag-and-drop functionality. Easy PDF page organizer." />
+    <meta name="keywords" content="organize PDF pages, reorder PDF pages, rearrange PDF, PDF page organizer, sort PDF pages" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/organize-pages.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <style>
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <div class="tool-icon">
+                <i class="fas fa-sort"></i>
+            </div>
+            <h1>PDF Page Organizer</h1>
+            <p>Reorder, remove, and reorganize pages in your PDF documents with drag & drop functionality</p>
+        </div>
+
+        <div class="main-card">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-file-upload"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Upload PDF File</h3>
+                    <p>Drag & drop a PDF file here or click to browse</p>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+            </div>
+
+            <div class="pages-container" id="pagesContainer">
+                <div class="selection-info" id="selectionInfo">
+                    <i class="fas fa-info-circle"></i> Drag pages to reorder • Click to select/deselect • Selected pages will be included in the output
+                </div>
+                <h3>PDF Pages (Drag to reorder)</h3>
+                <div class="pages-grid" id="pagesGrid"></div>
+            </div>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <h3><i class="fas fa-cog"></i> Organization Options</h3>
+                    <div class="option-item">
+                        <input type="radio" name="organizeType" value="custom" id="customOrder" checked>
+                        <label for="customOrder">Custom order (drag to arrange)</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="organizeType" value="reverse" id="reverseOrder">
+                        <label for="reverseOrder">Reverse page order</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="organizeType" value="odd" id="oddPages">
+                        <label for="oddPages">Odd pages only</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="radio" name="organizeType" value="even" id="evenPages">
+                        <label for="evenPages">Even pages only</label>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-tools"></i> Output Options</h3>
+                    <div class="option-item">
+                        <input type="checkbox" name="optimize" id="optimize" checked>
+                        <label for="optimize">Optimize for web</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="metadata" id="metadata" checked>
+                        <label for="metadata">Preserve metadata</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" name="selectedOnly" id="selectedOnly">
+                        <label for="selectedOnly">Include selected pages only</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Processing...</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="organizeBtn" disabled>
+                    <i class="fas fa-magic"></i> Organize PDF
+                </button>
+                <button class="btn btn-secondary" id="selectAllBtn" disabled>
+                    <i class="fas fa-check-square"></i> Select All
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+
+            <div class="result-card" id="resultCard">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>PDF Organized Successfully!</h2>
+                <p id="resultInfo">Your organized PDF is ready for download</p>
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download Organized PDF
+                    </button>
+                    <button class="btn btn-secondary" id="newOrganizeBtn">
+                        <i class="fas fa-plus"></i> Organize Another PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class PDFPageOrganizer {
+            constructor() {
+                this.originalPdf = null;
+                this.pages = [];
+                this.organizedPdfBlob = null;
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const uploadZone = document.getElementById('uploadZone');
+                const fileInput = document.getElementById('fileInput');
+                const organizeBtn = document.getElementById('organizeBtn');
+                const selectAllBtn = document.getElementById('selectAllBtn');
+                const clearBtn = document.getElementById('clearBtn');
+                const downloadBtn = document.getElementById('downloadBtn');
+                const newOrganizeBtn = document.getElementById('newOrganizeBtn');
+
+                uploadZone.addEventListener('click', () => fileInput.click());
+                uploadZone.addEventListener('dragover', this.handleDragOver.bind(this));
+                uploadZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                uploadZone.addEventListener('drop', this.handleDrop.bind(this));
+
+                fileInput.addEventListener('change', this.handleFileSelect.bind(this));
+                organizeBtn.addEventListener('click', this.organizePDF.bind(this));
+                selectAllBtn.addEventListener('click', this.toggleSelectAll.bind(this));
+                clearBtn.addEventListener('click', this.clearAll.bind(this));
+                downloadBtn.addEventListener('click', this.downloadOrganizedPDF.bind(this));
+                newOrganizeBtn.addEventListener('click', this.resetTool.bind(this));
+
+                document.querySelectorAll('input[name="organizeType"]').forEach(radio => {
+                    radio.addEventListener('change', this.applyOrganizeType.bind(this));
+                });
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.add('dragover');
+            }
+
+            handleDragLeave(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files);
+                if (files.length > 0 && files[0].type === 'application/pdf') {
+                    this.loadPDF(files[0]);
+                }
+            }
+
+            handleFileSelect(e) {
+                const file = e.target.files[0];
+                if (file && file.type === 'application/pdf') {
+                    this.loadPDF(file);
+                }
+            }
+
+            async loadPDF(file) {
+                try {
+                    const arrayBuffer = await file.arrayBuffer();
+                    this.originalPdf = await PDFLib.PDFDocument.load(arrayBuffer);
+                    const pageCount = this.originalPdf.getPageCount();
+                    
+                    this.pages = Array.from({ length: pageCount }, (_, i) => ({
+                        index: i,
+                        originalIndex: i,
+                        selected: true,
+                        pageNumber: i + 1
+                    }));
+
+                    this.updateUI();
+                } catch (error) {
+                    alert('Error loading PDF. Please ensure it\'s a valid PDF file.');
+                    console.error(error);
+                }
+            }
+
+            updateUI() {
+                const pagesContainer = document.getElementById('pagesContainer');
+                const organizeBtn = document.getElementById('organizeBtn');
+                const selectAllBtn = document.getElementById('selectAllBtn');
+
+                if (this.pages.length > 0) {
+                    pagesContainer.style.display = 'block';
+                    organizeBtn.disabled = false;
+                    selectAllBtn.disabled = false;
+                    this.renderPages();
+                    this.updateSelectionInfo();
+                } else {
+                    pagesContainer.style.display = 'none';
+                    organizeBtn.disabled = true;
+                    selectAllBtn.disabled = true;
+                }
+            }
+
+            renderPages() {
+                const pagesGrid = document.getElementById('pagesGrid');
+                pagesGrid.innerHTML = '';
+
+                this.pages.forEach((page, index) => {
+                    const pageElement = document.createElement('div');
+                    pageElement.className = `page-item ${page.selected ? 'selected' : ''}`;
+                    pageElement.draggable = true;
+                    pageElement.dataset.index = index;
+                    
+                    pageElement.innerHTML = `
+                        <div class="page-number">Page ${page.pageNumber}</div>
+                        <div class="page-preview">
+                            <div class="page-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                        </div>
+                        <div class="page-actions">
+                            <input type="checkbox" class="page-checkbox" ${page.selected ? 'checked' : ''} 
+                                   onchange="pageOrganizer.togglePageSelection(${index})">
+                            <span style="font-size: 0.9rem; color: #666;">Pos: ${index + 1}</span>
+                        </div>
+                    `;
+
+                    pageElement.addEventListener('dragstart', this.handlePageDragStart.bind(this));
+                    pageElement.addEventListener('dragover', this.handlePageDragOver.bind(this));
+                    pageElement.addEventListener('drop', this.handlePageDrop.bind(this));
+                    pageElement.addEventListener('dragend', this.handlePageDragEnd.bind(this));
+
+                    pagesGrid.appendChild(pageElement);
+                });
+            }
+
+            handlePageDragStart(e) {
+                e.dataTransfer.setData('text/plain', e.target.dataset.index);
+                e.target.classList.add('dragging');
+            }
+
+            handlePageDragOver(e) {
+                e.preventDefault();
+            }
+
+            handlePageDrop(e) {
+                e.preventDefault();
+                const draggedIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                const targetElement = e.target.closest('.page-item');
+                if (!targetElement) return;
+                
+                const targetIndex = parseInt(targetElement.dataset.index);
+                
+                if (draggedIndex !== targetIndex) {
+                    const draggedPage = this.pages.splice(draggedIndex, 1)[0];
+                    this.pages.splice(targetIndex, 0, draggedPage);
+                    this.renderPages();
+                    this.updateSelectionInfo();
+                }
+            }
+
+            handlePageDragEnd(e) {
+                e.target.classList.remove('dragging');
+            }
+
+            togglePageSelection(index) {
+                this.pages[index].selected = !this.pages[index].selected;
+                this.renderPages();
+                this.updateSelectionInfo();
+            }
+
+            toggleSelectAll() {
+                const allSelected = this.pages.every(page => page.selected);
+                this.pages.forEach(page => page.selected = !allSelected);
+                this.renderPages();
+                this.updateSelectionInfo();
+            }
+
+            updateSelectionInfo() {
+                const selectedCount = this.pages.filter(page => page.selected).length;
+                const totalCount = this.pages.length;
+                const info = document.getElementById('selectionInfo');
+                info.innerHTML = `<i class="fas fa-info-circle"></i> ${selectedCount} of ${totalCount} pages selected • Drag to reorder • Click checkboxes to select/deselect`;
+            }
+
+            applyOrganizeType() {
+                const organizeType = document.querySelector('input[name="organizeType"]:checked').value;
+                
+                switch (organizeType) {
+                    case 'reverse':
+                        this.pages.reverse();
+                        break;
+                    case 'odd':
+                        this.pages.forEach(page => {
+                            page.selected = page.pageNumber % 2 === 1;
+                        });
+                        break;
+                    case 'even':
+                        this.pages.forEach(page => {
+                            page.selected = page.pageNumber % 2 === 0;
+                        });
+                        break;
+                }
+                
+                this.renderPages();
+                this.updateSelectionInfo();
+            }
+
+            async organizePDF() {
+                if (!this.originalPdf || this.pages.length === 0) return;
+
+                const progressContainer = document.getElementById('progressContainer');
+                const progressFill = document.getElementById('progressFill');
+                const progressText = document.getElementById('progressText');
+                const organizeBtn = document.getElementById('organizeBtn');
+
+                progressContainer.style.display = 'block';
+                organizeBtn.disabled = true;
+                progressText.textContent = 'Creating organized PDF...';
+
+                try {
+                    const newPdf = await PDFLib.PDFDocument.create();
+                    const selectedOnly = document.getElementById('selectedOnly').checked;
+                    
+                    let pagesToProcess = selectedOnly ? 
+                        this.pages.filter(page => page.selected) : 
+                        this.pages;
+
+                    if (pagesToProcess.length === 0) {
+                        alert('No pages selected for processing!');
+                        progressContainer.style.display = 'none';
+                        organizeBtn.disabled = false;
+                        return;
+                    }
+
+                    const totalPages = pagesToProcess.length;
+                    
+                    for (let i = 0; i < totalPages; i++) {
+                        const pageData = pagesToProcess[i];
+                        progressText.textContent = `Processing page ${i + 1} of ${totalPages}...`;
+                        
+                        const [copiedPage] = await newPdf.copyPages(this.originalPdf, [pageData.originalIndex]);
+                        newPdf.addPage(copiedPage);
+                        
+                        const progress = ((i + 1) / totalPages) * 100;
+                        progressFill.style.width = `${progress}%`;
+                        
+                        await new Promise(resolve => setTimeout(resolve, 50));
+                    }
+
+                    if (document.getElementById('metadata').checked) {
+                        newPdf.setTitle('Organized PDF Document');
+                        newPdf.setCreator('PDF Page Organizer');
+                        newPdf.setCreationDate(new Date());
+                    }
+
+                    progressText.textContent = 'Finalizing PDF...';
+                    const pdfBytes = await newPdf.save();
+                    this.organizedPdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+                    this.showResult(totalPages, this.organizedPdfBlob.size);
+
+                } catch (error) {
+                    console.error('Error organizing PDF:', error);
+                    alert('Error organizing PDF. Please try again.');
+                    progressContainer.style.display = 'none';
+                    organizeBtn.disabled = false;
+                }
+            }
+
+            showResult(totalPages, fileSize) {
+                const resultCard = document.getElementById('resultCard');
+                const resultInfo = document.getElementById('resultInfo');
+                const progressContainer = document.getElementById('progressContainer');
+
+                progressContainer.style.display = 'none';
+                resultCard.style.display = 'block';
+                
+                const fileSizeMB = (fileSize / 1024 / 1024).toFixed(2);
+                resultInfo.textContent = `${totalPages} pages organized • ${fileSizeMB} MB`;
+
+                resultCard.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            downloadOrganizedPDF() {
+                if (!this.organizedPdfBlob) return;
+
+                const url = URL.createObjectURL(this.organizedPdfBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `organized_pages_${new Date().getTime()}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            clearAll() {
+                this.originalPdf = null;
+                this.pages = [];
+                this.organizedPdfBlob = null;
+                document.getElementById('fileInput').value = '';
+                this.updateUI();
+            }
+
+            resetTool() {
+                this.clearAll();
+                document.getElementById('resultCard').style.display = 'none';
+                document.getElementById('progressContainer').style.display = 'none';
+            }
+        }
+
+        const pageOrganizer = new PDFPageOrganizer();
+    </script>
+</body>
+</html>

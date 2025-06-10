@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert PDF to Word Online Free | PDF to DOC DOCX | SmartConverter</title>
+    <meta name="description" content="Convert PDF files to Microsoft Word documents (DOC, DOCX) online for free. Maintain formatting and make PDFs editable." />
+    <meta name="keywords" content="PDF to Word, convert PDF to Word, PDF to DOC, PDF to DOCX, free PDF converter" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/pdf-to-word.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <div class="tool-icon">
+                <i class="fas fa-file-word"></i>
+            </div>
+            <h1>Advanced PDF to Word Converter</h1>
+            <p>Convert your PDF files to editable Word documents with high accuracy</p>
+        </div>
+
+        <div class="main-card">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Upload PDF File</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+            </div>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <h3><i class="fas fa-cog"></i> Conversion Options</h3>
+                    <div class="format-selector">
+                        <div class="format-option selected" data-format="docx">
+                            <i class="fas fa-file-word"></i>
+                            <div>DOCX</div>
+                            <p>Modern Word format</p>
+                        </div>
+                        <div class="format-option" data-format="doc">
+                            <i class="fas fa-file-word"></i>
+                            <div>DOC</div>
+                            <p>Legacy Word format</p>
+                        </div>
+                        <div class="format-option" data-format="rtf">
+                            <i class="fas fa-file-alt"></i>
+                            <div>RTF</div>
+                            <p>Rich Text Format</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-tachometer-alt"></i> Quality Settings</h3>
+                    <div class="quality-selector">
+                        <div class="quality-option selected" data-quality="high">
+                            <h4>High Quality</h4>
+                            <p>Best accuracy, larger file</p>
+                        </div>
+                        <div class="quality-option" data-quality="medium">
+                            <h4>Balanced</h4>
+                            <p>Good accuracy, moderate size</p>
+                        </div>
+                        <div class="quality-option" data-quality="low">
+                            <h4>Small Size</h4>
+                            <p>Basic formatting, small file</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversion-status" id="conversionStatus">
+                <div class="status-step">
+                    <div class="step-icon pending">1</div>
+                    <div>Uploading PDF file</div>
+                </div>
+                <div class="status-step">
+                    <div class="step-icon pending">2</div>
+                    <div>Processing document</div>
+                </div>
+                <div class="status-step">
+                    <div class="step-icon pending">3</div>
+                    <div>Generating Word file</div>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Error message will appear here</span>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="convertBtn" disabled>
+                    <i class="fas fa-exchange-alt"></i> Convert to Word
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+
+            <div class="result-card" id="resultCard">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Conversion Successful!</h2>
+                <p id="resultInfo">Your Word document is ready for download</p>
+                
+                <div class="download-preview">
+                    <div class="preview-header">
+                        <div class="preview-info">
+                            <h4 id="outputFilename">document.docx</h4>
+                            <p id="outputFilesize">0.00 MB</p>
+                        </div>
+                        <div class="file-icon">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="file-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="pageCount">0</div>
+                            <div class="stat-label">Pages</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="wordCount">0</div>
+                            <div class="stat-label">Words</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="imageCount">0</div>
+                            <div class="stat-label">Images</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="qualityLabel">High</div>
+                            <div class="stat-label">Quality</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download Word File
+                    </button>
+                    <button class="btn btn-secondary" id="newConvertBtn">
+                        <i class="fas fa-plus"></i> Convert Another
+                    </button>
+                </div>
+            </div>
+            
+            <div class="security-note">
+                <i class="fas fa-lock"></i>
+                <p>Your files are processed securely and never stored on our servers</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class PDFToWordConverter {
+            constructor() {
+                this.selectedFile = null;
+                this.convertedBlob = null;
+                this.outputFormat = 'docx';
+                this.qualitySetting = 'high';
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const uploadZone = document.getElementById('uploadZone');
+                const fileInput = document.getElementById('fileInput');
+                const convertBtn = document.getElementById('convertBtn');
+                const clearBtn = document.getElementById('clearBtn');
+                const downloadBtn = document.getElementById('downloadBtn');
+                const newConvertBtn = document.getElementById('newConvertBtn');
+                
+                // Format selection
+                document.querySelectorAll('.format-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('.format-option').forEach(opt => 
+                            opt.classList.remove('selected'));
+                        option.classList.add('selected');
+                        this.outputFormat = option.dataset.format;
+                    });
+                });
+                
+                // Quality selection
+                document.querySelectorAll('.quality-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('.quality-option').forEach(opt => 
+                            opt.classList.remove('selected'));
+                        option.classList.add('selected');
+                        this.qualitySetting = option.dataset.quality;
+                    });
+                });
+
+                // Upload zone events
+                uploadZone.addEventListener('click', () => fileInput.click());
+                uploadZone.addEventListener('dragover', this.handleDragOver.bind(this));
+                uploadZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                uploadZone.addEventListener('drop', this.handleDrop.bind(this));
+
+                // File input change
+                fileInput.addEventListener('change', this.handleFileSelect.bind(this));
+
+                // Button events
+                convertBtn.addEventListener('click', this.convertToWord.bind(this));
+                clearBtn.addEventListener('click', this.clearFile.bind(this));
+                downloadBtn.addEventListener('click', this.downloadWordFile.bind(this));
+                newConvertBtn.addEventListener('click', this.resetTool.bind(this));
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.add('dragover');
+            }
+
+            handleDragLeave(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files);
+                if (files.length > 0 && files[0].type === 'application/pdf') {
+                    this.handleFile(files[0]);
+                } else {
+                    this.showError('Please upload a valid PDF file');
+                }
+            }
+
+            handleFileSelect(e) {
+                if (e.target.files.length > 0) {
+                    this.handleFile(e.target.files[0]);
+                }
+            }
+
+            handleFile(file) {
+                if (file.type === 'application/pdf') {
+                    this.selectedFile = file;
+                    document.getElementById('convertBtn').disabled = false;
+                    
+                    // Update UI to show selected file
+                    const uploadText = document.querySelector('.upload-text');
+                    uploadText.innerHTML = `
+                        <h3>${file.name}</h3>
+                        <p>${(file.size / 1024 / 1024).toFixed(2)} MB • Ready to convert</p>
+                    `;
+                    
+                    this.hideError();
+                } else {
+                    this.showError('Please select a PDF file');
+                }
+            }
+
+            async convertToWord() {
+                if (!this.selectedFile) return;
+                
+                const conversionStatus = document.getElementById('conversionStatus');
+                const steps = conversionStatus.querySelectorAll('.status-step');
+                const convertBtn = document.getElementById('convertBtn');
+                
+                // Reset UI
+                this.hideError();
+                conversionStatus.style.display = 'block';
+                convertBtn.disabled = true;
+                
+                // Simulate conversion process (in a real app, this would call an API)
+                try {
+                    // Step 1: Uploading
+                    steps[0].querySelector('.step-icon').classList.remove('pending');
+                    steps[0].querySelector('.step-icon').classList.add('processing');
+                    await this.delay(1500);
+                    steps[0].querySelector('.step-icon').classList.remove('processing');
+                    steps[0].querySelector('.step-icon').classList.add('completed');
+                    
+                    // Step 2: Processing
+                    steps[1].querySelector('.step-icon').classList.remove('pending');
+                    steps[1].querySelector('.step-icon').classList.add('processing');
+                    await this.delay(2000);
+                    steps[1].querySelector('.step-icon').classList.remove('processing');
+                    steps[1].querySelector('.step-icon').classList.add('completed');
+                    
+                    // Step 3: Generating
+                    steps[2].querySelector('.step-icon').classList.remove('pending');
+                    steps[2].querySelector('.step-icon').classList.add('processing');
+                    await this.delay(1000);
+                    steps[2].querySelector('.step-icon').classList.remove('processing');
+                    steps[2].querySelector('.step-icon').classList.add('completed');
+                    
+                    // Simulate successful conversion
+                    this.showResult();
+                    
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    this.showError('Conversion failed. Please try again.');
+                    conversionStatus.style.display = 'none';
+                    convertBtn.disabled = false;
+                    
+                    // Reset steps
+                    steps.forEach(step => {
+                        step.querySelector('.step-icon').className = 'step-icon pending';
+                    });
+                }
+            }
+
+            showResult() {
+                const resultCard = document.getElementById('resultCard');
+                const conversionStatus = document.getElementById('conversionStatus');
+                
+                // Generate random stats for demo
+                const pageCount = Math.floor(Math.random() * 10) + 1;
+                const wordCount = Math.floor(Math.random() * 2000) + 500;
+                const imageCount = Math.floor(Math.random() * 10);
+                const fileSize = (Math.random() * 2 + 0.5).toFixed(2);
+                
+                // Update result info
+                document.getElementById('outputFilename').textContent = 
+                    `converted_document.${this.outputFormat}`;
+                document.getElementById('outputFilesize').textContent = 
+                    `${fileSize} MB`;
+                document.getElementById('pageCount').textContent = pageCount;
+                document.getElementById('wordCount').textContent = wordCount;
+                document.getElementById('imageCount').textContent = imageCount;
+                document.getElementById('qualityLabel').textContent = 
+                    this.qualitySetting.charAt(0).toUpperCase() + this.qualitySetting.slice(1);
+                
+                // Show result card
+                conversionStatus.style.display = 'none';
+                resultCard.style.display = 'block';
+                
+                // Smooth scroll to result
+                resultCard.scrollIntoView({ behavior: 'smooth' });
+                
+                // In a real app, you would have the actual converted file here
+                // For demo, we'll create a dummy blob
+                const dummyContent = `This is a demo Word file converted from PDF.\n\n` +
+                    `Original file: ${this.selectedFile.name}\n` +
+                    `Format: ${this.outputFormat}\n` +
+                    `Quality: ${this.qualitySetting}\n` +
+                    `Generated at: ${new Date().toLocaleString()}`;
+                
+                this.convertedBlob = new Blob([dummyContent], { type: 'application/msword' });
+            }
+
+            downloadWordFile() {
+                if (!this.convertedBlob) return;
+
+                const url = URL.createObjectURL(this.convertedBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `converted_document.${this.outputFormat}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            showError(message) {
+                const errorMessage = document.getElementById('errorMessage');
+                document.getElementById('errorText').textContent = message;
+                errorMessage.style.display = 'block';
+            }
+
+            hideError() {
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+
+            clearFile() {
+                this.selectedFile = null;
+                this.convertedBlob = null;
+                document.getElementById('fileInput').value = '';
+                document.getElementById('convertBtn').disabled = true;
+                
+                // Reset upload zone
+                const uploadText = document.querySelector('.upload-text');
+                uploadText.innerHTML = `
+                    <h3>Upload PDF File</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                `;
+                
+                this.hideError();
+            }
+
+            resetTool() {
+                this.clearFile();
+                document.getElementById('resultCard').style.display = 'none';
+                document.getElementById('conversionStatus').style.display = 'none';
+                
+                // Reset conversion steps
+                const steps = document.querySelectorAll('.status-step');
+                steps.forEach(step => {
+                    step.querySelector('.step-icon').className = 'step-icon pending';
+                });
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Initialize the converter
+        const pdfToWordConverter = new PDFToWordConverter();
+    </script>
+</body>
+</html>

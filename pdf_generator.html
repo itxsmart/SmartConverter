@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generator Online Free | Create PDF from Text | SmartConverter</title>
+    <meta name="description" content="Generate PDF files from text online for free. Create professional PDF documents with custom formatting and styling options." />
+    <meta name="keywords" content="PDF generator, create PDF online, text to PDF, generate PDF document, free PDF creator" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/pdf_generator.html" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Only missing classes that might not be in your styles.css */
+        /* Specific textarea styling */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+#content {
+    width: 100%;
+    max-width: 600px;
+    min-height: 200px;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    resize: vertical;
+    margin: 0 auto;
+    display: block;
+    background: #fafafa;
+    transition: all 0.3s ease;
+}
+
+#content:focus {
+    border-color: #667eea;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Content field container */
+.form-group:nth-child(3) {
+    text-align: center;
+    margin-bottom: 30px;
+}
+/* Replace .textarea class */
+.textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 200px; /* Increased height */
+    max-width: 600px; /* Max width for better look */
+    margin: 0 auto; /* Center alignment */
+    display: block; /* Make it block for centering */
+}
+
+/* Replace .form-group class (for content field specifically) */
+.form-group:has(.textarea) {
+    text-align: center; /* Center the whole group */
+    margin-bottom: 30px;
+}
+
+/* Add/Replace label styling for textarea */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center; /* Center the label */
+}
+
+/* Replace .input class for consistency */
+.input {
+    width: 100%;
+    max-width: 400px; /* Limit width for title and author */
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Replace form-group for title and author fields */
+.form-group:has(.input) {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Focus states */
+.input:focus, .textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+        .status {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <h1>📄 PDF Generator</h1>
+            <p>Create and download professional PDF documents</p>
+        </div>
+        
+        <form id="pdfForm" class="form">
+            <div class="form-group">
+                <label for="title">Document Title:</label>
+                <input type="text" id="title" name="title" class="input" placeholder="Enter document title..." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="author">Author Name:</label>
+                <input type="text" id="author" name="author" class="input" placeholder="Enter author name..." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="content">Document Content:</label>
+                <textarea id="content" name="content" class="textarea" placeholder="Enter your document content..." rows="8" required></textarea>
+            </div>
+            
+            <div class="btn-group">
+                <button type="button" id="generateBtn" class="btn generate-btn">Generate & Download PDF</button>
+                <button type="button" id="previewBtn" class="btn preview-btn">Preview PDF</button>
+                <button type="button" id="clearBtn" class="btn clear-btn">Clear Form</button>
+            </div>
+        </form>
+        
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+            <p>Generating PDF...</p>
+        </div>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="preview-container" id="previewContainer" style="display: none;">
+            <h3>PDF Preview</h3>
+            <iframe id="pdfPreview" width="100%" height="500px"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Fixed PDF generation logic
+        const { jsPDF } = window.jspdf;
+        
+        // Global variables
+        let currentPdfBlob = null;
+        
+        // DOM Elements
+        const form = document.getElementById('pdfForm');
+        const generateBtn = document.getElementById('generateBtn');
+        const previewBtn = document.getElementById('previewBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const loader = document.getElementById('loader');
+        const status = document.getElementById('status');
+        const previewContainer = document.getElementById('previewContainer');
+        const pdfPreview = document.getElementById('pdfPreview');
+        
+        // Helper function to show status
+        function showStatus(message, type = 'info') {
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Helper function to show/hide loader
+        function toggleLoader(show) {
+            loader.style.display = show ? 'block' : 'none';
+            generateBtn.disabled = show;
+            previewBtn.disabled = show;
+        }
+        
+        // Fixed PDF generation function
+        function generatePDF() {
+            try {
+                const title = document.getElementById('title').value.trim();
+                const author = document.getElementById('author').value.trim();
+                const content = document.getElementById('content').value.trim();
+                
+                if (!title || !author || !content) {
+                    showStatus('Please fill in all fields', 'error');
+                    return null;
+                }
+                
+                // Create new PDF document
+                const doc = new jsPDF();
+                
+                // Set document properties
+                doc.setProperties({
+                    title: title,
+                    author: author,
+                    creator: 'PDF Generator',
+                    producer: 'jsPDF'
+                });
+                
+                // Add title
+                doc.setFontSize(20);
+                doc.setFont(undefined, 'bold');
+                doc.text(title, 20, 30);
+                
+                // Add author
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'normal');
+                doc.text(`By: ${author}`, 20, 45);
+                
+                // Add date
+                const currentDate = new Date().toLocaleString();
+                doc.text(`Generated: ${currentDate}`, 20, 55);
+                
+                // Add separator line
+                doc.line(20, 65, 190, 65);
+                
+                // Add content
+                doc.setFontSize(11);
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const margins = 20;
+                const maxLineWidth = pageWidth - (margins * 2);
+                
+                // Split content into lines that fit the page width
+                const lines = doc.splitTextToSize(content, maxLineWidth);
+                
+                let yPosition = 80;
+                const lineHeight = 7;
+                const pageHeight = doc.internal.pageSize.getHeight();
+                
+                // Add content with proper pagination
+                for (let i = 0; i < lines.length; i++) {
+                    if (yPosition > pageHeight - 30) {
+                        doc.addPage();
+                        yPosition = 30;
+                    }
+                    doc.text(lines[i], margins, yPosition);
+                    yPosition += lineHeight;
+                }
+                
+                // Add page numbers
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(10);
+                    doc.text(`Page ${i} of ${pageCount}`, pageWidth - 40, pageHeight - 10);
+                }
+                
+                return doc;
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                showStatus('Error generating PDF: ' + error.message, 'error');
+                return null;
+            }
+        }
+        
+        // Fixed download function
+        function downloadPDF() {
+            toggleLoader(true);
+            
+            try {
+                const doc = generatePDF();
+                if (!doc) {
+                    toggleLoader(false);
+                    return;
+                }
+                
+                const title = document.getElementById('title').value.trim();
+                const filename = `${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`;
+                
+                // Generate blob and download
+                const pdfBlob = doc.output('blob');
+                currentPdfBlob = pdfBlob;
+                
+                // Create download link
+                const url = URL.createObjectURL(pdfBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                // Clean up URL
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+                
+                showStatus('PDF generated and downloaded successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                showStatus('Error downloading PDF: ' + error.message, 'error');
+            } finally {
+                toggleLoader(false);
+            }
+        }
+        
+        // Fixed preview function
+        function previewPDF() {
+            toggleLoader(true);
+            
+            try {
+                const doc = generatePDF();
+                if (!doc) {
+                    toggleLoader(false);
+                    return;
+                }
+                
+                // Generate blob for preview
+                const pdfBlob = doc.output('blob');
+                currentPdfBlob = pdfBlob;
+                
+                // Create object URL for preview
+                const url = URL.createObjectURL(pdfBlob);
+                pdfPreview.src = url;
+                previewContainer.style.display = 'block';
+                
+                // Scroll to preview
+                previewContainer.scrollIntoView({ behavior: 'smooth' });
+                
+                showStatus('PDF preview generated successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Preview error:', error);
+                showStatus('Error previewing PDF: ' + error.message, 'error');
+            } finally {
+                toggleLoader(false);
+            }
+        }
+        
+        // Clear form function
+        function clearForm() {
+            form.reset();
+            previewContainer.style.display = 'none';
+            status.style.display = 'none';
+            
+            // Clean up blob URL if exists
+            if (pdfPreview.src) {
+                URL.revokeObjectURL(pdfPreview.src);
+                pdfPreview.src = '';
+            }
+            
+            currentPdfBlob = null;
+            showStatus('Form cleared successfully!', 'success');
+        }
+        
+        // Event listeners
+        generateBtn.addEventListener('click', downloadPDF);
+        previewBtn.addEventListener('click', previewPDF);
+        clearBtn.addEventListener('click', clearForm);
+        
+        // Form validation
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            downloadPDF();
+        });
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', function() {
+            if (currentPdfBlob && pdfPreview.src) {
+                URL.revokeObjectURL(pdfPreview.src);
+            }
+        });
+        
+        // Initialize
+        console.log('PDF Generator initialized successfully');
+        
+    </script>
+</body>
+</html>

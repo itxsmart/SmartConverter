@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test PDF Tools | SmartConverter Testing Page</title>
+    <meta name="description" content="Test and try SmartConverter PDF tools. Experimental features and beta testing for new PDF conversion and editing capabilities." />
+    <meta name="keywords" content="test PDF tools, SmartConverter beta, PDF tools testing, experimental features" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Missing CSS classes to complement your existing styles.css */
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .summary-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+
+        .file-icon {
+            color: #d32f2f;
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .file-size {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .alert {
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .drag-active {
+            border-color: #007bff !important;
+            background: rgba(0, 123, 255, 0.05) !important;
+        }
+
+        .language-selector {
+            margin: 15px 0;
+        }
+
+        .language-selector select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .summary-length-selector {
+            margin: 15px 0;
+        }
+
+        .summary-length-selector input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .length-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>PDF Summarizer AI</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How it Works</a>
+                    <a href="#pricing">Pricing</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">AI-Powered PDF Summarizer</h1>
+                <p class="hero-subtitle">Transform lengthy PDFs into concise, intelligent summaries in seconds. Extract key insights with advanced AI technology.</p>
+                
+                <!-- Upload Area -->
+                <div class="upload-container">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3>Drop your PDF here or click to browse</h3>
+                        <p>Supports PDF files up to 50MB</p>
+                        <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                        <button class="btn-primary" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-upload"></i> Choose PDF File
+                        </button>
+                    </div>
+
+                    <!-- File Info Display -->
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <div class="file-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="file-details">
+                            <div class="file-name" id="fileName"></div>
+                            <div class="file-size" id="fileSize"></div>
+                        </div>
+                        <button class="btn-secondary" onclick="removeFile()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <!-- Processing Options -->
+                    <div class="processing-options" id="processingOptions" style="display: none;">
+                        <div class="language-selector">
+                            <label><strong>Summary Language:</strong></label>
+                            <select id="languageSelect">
+                                <option value="en">English</option>
+                                <option value="ur">Urdu</option>
+                                <option value="es">Spanish</option>
+                                <option value="fr">French</option>
+                                <option value="de">German</option>
+                                <option value="zh">Chinese</option>
+                                <option value="ar">Arabic</option>
+                            </select>
+                        </div>
+
+                        <div class="summary-length-selector">
+                            <label><strong>Summary Length:</strong></label>
+                            <input type="range" id="lengthRange" min="1" max="3" value="2" step="1">
+                            <div class="length-labels">
+                                <span>Brief</span>
+                                <span>Detailed</span>
+                                <span>Comprehensive</span>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn-primary" id="summarizeBtn" onclick="startSummarization()">
+                                <i class="fas fa-magic"></i> Generate Summary
+                            </button>
+                            <button class="btn-secondary" onclick="extractText()">
+                                <i class="fas fa-file-alt"></i> Extract Text Only
+                            </button>
+                            <button class="btn-success" onclick="translatePDF()">
+                                <i class="fas fa-language"></i> Translate PDF
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress-bar" id="progressBar" style="display: none;">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+
+                    <!-- Alerts -->
+                    <div class="alert alert-success" id="successAlert"></div>
+                    <div class="alert alert-error" id="errorAlert"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary Output -->
+    <section class="container">
+        <div class="summary-output" id="summaryOutput">
+            <h3><i class="fas fa-clipboard-list"></i> Document Summary</h3>
+            
+            <div class="summary-stats" id="summaryStats">
+                <div class="stat-card">
+                    <div class="stat-number" id="originalWords">0</div>
+                    <div class="stat-label">Original Words</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="summaryWords">0</div>
+                    <div class="stat-label">Summary Words</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="compressionRatio">0%</div>
+                    <div class="stat-label">Compression</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="readingTime">0</div>
+                    <div class="stat-label">Reading Time (min)</div>
+                </div>
+            </div>
+
+            <div class="summary-content" id="summaryContent"></div>
+
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="downloadSummary()">
+                    <i class="fas fa-download"></i> Download Summary
+                </button>
+                <button class="btn-secondary" onclick="copySummary()">
+                    <i class="fas fa-copy"></i> Copy to Clipboard
+                </button>
+                <button class="btn-success" onclick="emailSummary()">
+                    <i class="fas fa-envelope"></i> Email Summary
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="container">
+        <h2 class="section-title">Powerful Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI-Powered Summarization</h3>
+                <p>Advanced machine learning algorithms analyze and extract key information from your PDFs with high accuracy.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>Multi-Language Support</h3>
+                <p>Process PDFs in multiple languages and generate summaries in your preferred language.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3>Lightning Fast</h3>
+                <p>Get your document summaries in seconds, not minutes. Optimized for speed and efficiency.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure & Private</h3>
+                <p>Your documents are processed securely and never stored on our servers. Complete privacy guaranteed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Friendly</h3>
+                <p>Works perfectly on all devices - desktop, tablet, and mobile. Summarize on the go.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Export Options</h3>
+                <p>Download summaries as PDF, Word, or plain text. Share via email or copy to clipboard.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>PDF Summarizer AI</h4>
+                    <p>Transform your document workflow with intelligent AI summarization.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#">AI Summarization</a></li>
+                        <li><a href="#">Text Extraction</a></li>
+                        <li><a href="#">Translation</a></li>
+                        <li><a href="#">Batch Processing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PDF Summarizer AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentFile = null;
+        let summaryData = null;
+
+        // File upload handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const processingOptions = document.getElementById('processingOptions');
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-active');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-active');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-active');
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type === 'application/pdf') {
+                handleFileSelection(files[0]);
+            } else {
+                showAlert('Please select a valid PDF file.', 'error');
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelection(e.target.files[0]);
+            }
+        });
+
+        function handleFileSelection(file) {
+            if (file.size > 50 * 1024 * 1024) { // 50MB limit
+                showAlert('File size must be less than 50MB.', 'error');
+                return;
+            }
+
+            currentFile = file;
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = formatFileSize(file.size);
+            
+            fileInfo.style.display = 'flex';
+            processingOptions.style.display = 'block';
+            uploadArea.style.display = 'none';
+        }
+
+        function removeFile() {
+            currentFile = null;
+            fileInfo.style.display = 'none';
+            processingOptions.style.display = 'none';
+            uploadArea.style.display = 'block';
+            document.getElementById('summaryOutput').style.display = 'none';
+            fileInput.value = '';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function startSummarization() {
+            if (!currentFile) {
+                showAlert('Please select a PDF file first.', 'error');
+                return;
+            }
+
+            const language = document.getElementById('languageSelect').value;
+            const lengthValue = document.getElementById('lengthRange').value;
+            const lengthMap = { '1': 'brief', '2': 'detailed', '3': 'comprehensive' };
+            const summaryLength = lengthMap[lengthValue];
+
+            showProgress();
+            simulatePDFProcessing(summaryLength, language);
+        }
+
+        function simulatePDFProcessing(length, language) {
+            const progressFill = document.getElementById('progressFill');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            
+            loadingSpinner.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                
+                progressFill.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        displaySummary(length);
+                        hideProgress();
+                        loadingSpinner.style.display = 'none';
+                    }, 1000);
+                }
+            }, 200);
+        }
+
+        function displaySummary(length) {
+            const summaryContent = document.getElementById('summaryContent');
+            const summaryOutput = document.getElementById('summaryOutput');
+
+            // Simulate different summary lengths
+            const summaries = {
+                brief: `<h4>Executive Summary</h4>
+                       <p>This document contains key information about [topic]. The main findings indicate significant improvements in efficiency and productivity. Recommendations include implementing new processes and technologies to optimize performance.</p>`,
+                
+                detailed: `<h4>Detailed Summary</h4>
+                          <h5>Key Points:</h5>
+                          <ul>
+                              <li><strong>Background:</strong> The document provides comprehensive analysis of current market trends and challenges.</li>
+                              <li><strong>Methodology:</strong> Research was conducted using quantitative and qualitative approaches over 6 months.</li>
+                              <li><strong>Findings:</strong> Results show 25% improvement in operational efficiency and 30% cost reduction.</li>
+                              <li><strong>Recommendations:</strong> Implement digital transformation initiatives and staff training programs.</li>
+                          </ul>
+                          <h5>Conclusion:</h5>
+                          <p>The analysis demonstrates clear benefits of proposed changes with measurable ROI expected within 12 months.</p>`,
+                
+                comprehensive: `<h4>Comprehensive Analysis</h4>
+                               <h5>1. Executive Overview</h5>
+                               <p>This comprehensive document analysis reveals critical insights into organizational performance and strategic opportunities. The 45-page report covers market analysis, operational efficiency, financial projections, and strategic recommendations.</p>
+                               
+                               <h5>2. Key Findings</h5>
+                               <p><strong>Market Analysis:</strong> Current market conditions show 15% growth potential with emerging opportunities in digital sectors. Competition analysis indicates strong positioning relative to industry peers.</p>
+                               <p><strong>Operational Review:</strong> Internal processes demonstrate 25% efficiency improvement potential through automation and workflow optimization. Resource allocation shows opportunities for 20% cost reduction.</p>
+                               
+                               <h5>3. Strategic Recommendations</h5>
+                               <ul>
+                                   <li>Implement digital transformation roadmap over 18-month timeline</li>
+                                   <li>Invest in employee training and development programs</li>
+                                   <li>Establish partnerships with key technology vendors</li>
+                                   <li>Create performance monitoring and KPI dashboard</li>
+                               </ul>
+                               
+                               <h5>4. Financial Projections</h5>
+                               <p>Implementation costs estimated at $500K with expected ROI of 300% within 24 months. Break-even analysis shows positive cash flow by month 18.</p>
+                               
+                               <h5>5. Risk Assessment</h5>
+                               <p>Primary risks include technology adoption challenges and market volatility. Mitigation strategies include phased implementation and contingency planning.</p>`
+            };
+
+            summaryContent.innerHTML = summaries[length];
+
+            // Update statistics
+            const originalWords = Math.floor(Math.random() * 5000) + 1000;
+            const summaryWords = Math.floor(originalWords * (length === 'brief' ? 0.1 : length === 'detailed' ? 0.2 : 0.3));
+            const compression = Math.floor((1 - summaryWords/originalWords) * 100);
+            const readingTime = Math.ceil(summaryWords / 200);
+
+            document.getElementById('originalWords').textContent = originalWords.toLocaleString();
+            document.getElementById('summaryWords').textContent = summaryWords.toLocaleString();
+            document.getElementById('compressionRatio').textContent = compression + '%';
+            document.getElementById('readingTime').textContent = readingTime;
+
+            summaryOutput.style.display = 'block';
+            summaryOutput.scrollIntoView({ behavior: 'smooth' });
+            
+            showAlert('Summary generated successfully!', 'success');
+        }
+
+        function extractText() {
+            if (!currentFile) {
+                showAlert('Please select a PDF file first.', 'error');
+                return;
+            }
+            
+            showProgress();
+            setTimeout(() => {
+                const summaryContent = document.getElementById('summaryContent');
+                summaryContent.innerHTML = `
+                    <h4>Extracted Text</h4>
+                    <div style="background: white; padding: 15px; border: 1px solid #ddd; border-radius: 6px; font-family: monospace; white-space: pre-wrap;">
+This is the raw text content extracted from your PDF document.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Section 1: Introduction
+The document begins with an overview of the current situation and provides context for the analysis that follows.
+
+Section 2: Methodology  
+This section describes the research methods and data collection procedures used in the study.
+
+Section 3: Results
+Key findings and statistical analysis are presented with supporting charts and graphs.
+
+Section 4: Conclusions
+Final recommendations and future directions are outlined based on the research findings.
+                    </div>
+                `;
+                document.getElementById('summaryOutput').style.display = 'block';
+                hideProgress();
+                showAlert('Text extracted successfully!', 'success');
+            }, 2000);
+        }
+
+        function translatePDF() {
+            if (!currentFile) {
+                showAlert('Please select a PDF file first.', 'error');
+                return;
+            }
+            
+            const language = document.getElementById('languageSelect').value;
+            const languageNames = {
+                'en': 'English', 'ur': 'Urdu', 'es': 'Spanish', 
+                'fr': 'French', 'de': 'German', 'zh': 'Chinese', 'ar': 'Arabic'
+            };
+            
+            showProgress();
+            setTimeout(() => {
+                const summaryContent = document.getElementById('summaryContent');
+                summaryContent.innerHTML = `
+                    <h4>Translation to ${languageNames[language]}</h4>
+                    <div style="background: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin: 15px 0;">
+                        <strong>Note:</strong> This is a simulated translation. In a real implementation, this would use advanced translation APIs like Google Translate or Azure Translator.
+                    </div>
+                    <p>Your PDF content has been translated to ${languageNames[language]}. The translation maintains the original document structure while adapting the content to the target language.</p>
+                    <p><em>Translation accuracy: 98.5% | Processing time: 3.2 seconds</em></p>
+                `;
+                document.getElementById('summaryOutput').style.display = 'block';
+                hideProgress();
+                showAlert(`Document translated to ${languageNames[language]} successfully!`, 'success');
+            }, 3000);
+        }
+
+        function showProgress() {
+            document.getElementById('progressBar').style.display = 'block';
+            document.getElementById('progressFill').style.width = '0%';
+        }
+
+        function hideProgress() {
+            document.getElementById('progressBar').style.display = 'none';
+        }
+
+        function showAlert(message, type) {
+            const alertElement = document.getElementById(type === 'error' ? 'errorAlert' : 'successAlert');
+            alertElement.textContent = message;
+            alertElement.style.display = 'block';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        function downloadSummary() {
+            const summaryContent = document.getElementById('summaryContent').innerText;
+            const blob = new Blob([summaryContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'pdf-summary.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            showAlert('Summary downloaded successfully!', 'success');
+        }
+
+        function copySummary() {
+            const summaryContent = document.getElementById('summaryContent').innerText;
+            navigator.clipboard.writeText(summaryContent).then(() => {
+                showAlert('Summary copied to clipboard!', 'success');
+            }).catch(() => {
+                showAlert('Failed to copy summary. Please try again.', 'error');
+            });
+        }
+
+        function emailSummary() {
+            const summaryContent = document.getElementById('summaryContent').innerText;
+            const subject = encodeURIComponent('PDF Summary - ' + (currentFile ? currentFile.name : 'Document'));
+            const body = encodeURIComponent('Please find the PDF summary below:\n\n' + summaryContent);
+            window.open(`mailto:?subject=${subject}&body=${body}`);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

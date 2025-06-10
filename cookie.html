@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | SmartConverter PDF Tools</title>
+    <meta name="description" content="Learn about how SmartConverter uses cookies to improve your experience with our PDF conversion tools. Cookie policy and privacy information." />
+    <meta name="keywords" content="cookie policy, privacy policy, SmartConverter cookies, PDF tools privacy" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/cookie.html" />
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 40px 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .policy-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .policy-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .policy-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .policy-header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+        
+        .policy-section {
+            margin-bottom: 30px;
+        }
+        
+        .policy-section h2 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .policy-section h3 {
+            color: #34495e;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        
+        .policy-section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .policy-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .policy-section li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cookie-table th,
+        .cookie-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .cookie-table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .cookie-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .cookie-type {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .essential {
+            background-color: #27ae60;
+        }
+        
+        .functional {
+            background-color: #f39c12;
+        }
+        
+        .analytics {
+            background-color: #3498db;
+        }
+        
+        .marketing {
+            background-color: #e74c3c;
+        }
+        
+        .contact-info {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .last-updated {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .policy-container {
+                padding: 20px;
+            }
+            
+            .policy-header h1 {
+                font-size: 2rem;
+            }
+            
+            .cookie-table {
+                font-size: 0.9rem;
+            }
+            
+            .cookie-table th,
+            .cookie-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="policy-container">
+                <div class="policy-header">
+                    <h1>🍪 Cookie Policy</h1>
+                    <p>Learn how we use cookies to improve your PDF Tools experience</p>
+                </div>
+
+                <section class="policy-section">
+                    <h2>1. What Are Cookies?</h2>
+                    <p>Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better experience by remembering your preferences and analyzing how you use our PDF tools.</p>
+                    <p>We use cookies to:</p>
+                    <ul>
+                        <li>Remember your tool preferences and settings</li>
+                        <li>Analyze website traffic and usage patterns</li>
+                        <li>Improve our services and user experience</li>
+                        <li>Provide personalized content recommendations</li>
+                    </ul>
+                </section>
+
+                <section class="policy-section">
+                    <h2>2. Types of Cookies We Use</h2>
+                    
+                    <h3>Essential Cookies</h3>
+                    <p>These cookies are necessary for the website to function properly. They enable core functionality such as security, network management, and accessibility.</p>
+                    
+                    <h3>Functional Cookies</h3>
+                    <p>These cookies allow us to remember choices you make and provide enhanced features. They may be set by us or by third-party providers whose services we use.</p>
+                    
+                    <h3>Analytics Cookies</h3>
+                    <p>We use analytics cookies to understand how visitors interact with our website. This helps us improve our PDF tools and services.</p>
+                    
+                    <h3>Marketing Cookies</h3>
+                    <p>These cookies track your online activity to help advertisers deliver more relevant advertisements or limit how many times you see an ad.</p>
+                </section>
+
+                <section class="policy-section">
+                    <h2>3. Detailed Cookie Information</h2>
+                    <table class="cookie-table">
+                        <thead>
+                            <tr>
+                                <th>Cookie Name</th>
+                                <th>Type</th>
+                                <th>Purpose</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>pdftools_session</td>
+                                <td><span class="cookie-type essential">Essential</span></td>
+                                <td>Maintains user session and security</td>
+                                <td>Session</td>
+                            </tr>
+                            <tr>
+                                <td>user_preferences</td>
+                                <td><span class="cookie-type functional">Functional</span></td>
+                                <td>Stores user tool preferences and settings</td>
+                                <td>30 days</td>
+                            </tr>
+                            <tr>
+                                <td>recent_tools</td>
+                                <td><span class="cookie-type functional">Functional</span></td>
+                                <td>Remembers recently used PDF tools</td>
+                                <td>7 days</td>
+                            </tr>
+                            <tr>
+                                <td>_ga</td>
+                                <td><span class="cookie-type analytics">Analytics</span></td>
+                                <td>Google Analytics - tracks website usage</td>
+                                <td>2 years</td>
+                            </tr>
+                            <tr>
+                                <td>_gid</td>
+                                <td><span class="cookie-type analytics">Analytics</span></td>
+                                <td>Google Analytics - distinguishes users</td>
+                                <td>24 hours</td>
+                            </tr>
+                            <tr>
+                                <td>conversion_tracking</td>
+                                <td><span class="cookie-type marketing">Marketing</span></td>
+                                <td>Tracks conversion events and user engagement</td>
+                                <td>90 days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="policy-section">
+                    <h2>4. Third-Party Cookies</h2>
+                    <p>We may also use third-party cookies from trusted partners:</p>
+                    <ul>
+                        <li><strong>Google Analytics:</strong> Helps us understand website traffic and user behavior</li>
+                        <li><strong>Font Awesome:</strong> Provides icons for better user interface</li>
+                        <li><strong>CDN Services:</strong> Improves website loading speed and performance</li>
+                    </ul>
+                </section>
+
+                <section class="policy-section">
+                    <h2>5. Managing Your Cookie Preferences</h2>
+                    <p>You have several options to manage cookies:</p>
+                    <ul>
+                        <li><strong>Browser Settings:</strong> Most browsers allow you to refuse cookies or delete existing ones</li>
+                        <li><strong>Cookie Consent Banner:</strong> Use our cookie consent banner to choose your preferences</li>
+                        <li><strong>Opt-out Links:</strong> Use third-party opt-out mechanisms for analytics and advertising cookies</li>
+                    </ul>
+                    <p><strong>Note:</strong> Disabling essential cookies may affect website functionality and your ability to use our PDF tools effectively.</p>
+                </section>
+
+                <section class="policy-section">
+                    <h2>6. Data Security</h2>
+                    <p>We take the security of your data seriously. All cookies are:</p>
+                    <ul>
+                        <li>Transmitted securely using HTTPS encryption</li>
+                        <li>Stored with appropriate security measures</li>
+                        <li>Limited to necessary information only</li>
+                        <li>Regularly reviewed and updated</li>
+                    </ul>
+                </section>
+
+                <section class="policy-section">
+                    <h2>7. Your Rights</h2>
+                    <p>Under applicable data protection laws (including GDPR), you have the right to:</p>
+                    <ul>
+                        <li>Access information about cookies we use</li>
+                        <li>Withdraw consent for non-essential cookies</li>
+                        <li>Request deletion of your cookie data</li>
+                        <li>Object to processing for direct marketing purposes</li>
+                    </ul>
+                </section>
+
+                <section class="policy-section">
+                    <h2>8. Changes to This Policy</h2>
+                    <p>We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes by posting the updated policy on our website.</p>
+                </section>
+
+                <div class="contact-info">
+                    <h3>📧 Contact Us</h3>
+                    <p>If you have any questions about this Cookie Policy or our use of cookies, please contact us at:</p>
+                    <p><strong>Email:</strong> SmartConverter@proton.me</p>
+                    <p><strong>Address:</strong> People's Colony Vehari, Punjab, Pakistan</p>
+                </div>
+
+                <!-- <div class="last-updated">
+                    <p><strong>Last Updated:</strong> January 15, 2025</p>
+                </div> -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PDF Tools. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

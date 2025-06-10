@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert JPG to PDF Online Free | Image to PDF Converter | SmartConverter</title>
+    <meta name="description" content="Convert JPG images to PDF format online for free. Combine multiple JPEG files into one PDF. High-quality image to PDF converter." />
+    <meta name="keywords" content="JPG to PDF, convert JPG to PDF, image to PDF, JPEG to PDF, photo to PDF, free image converter" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/jpg-to-pdf.html" />
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<style>
+    /* Missing CSS Classes for JPG to PDF Converter */
+    header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+
+.converter-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.title {
+    color: #2d3748;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #718096;
+    font-size: 1rem;
+}
+
+.upload-section {
+    margin-bottom: 2rem;
+}
+
+.file-input-wrapper {
+    position: relative;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.file-input-wrapper:hover,
+.file-input-wrapper.drag-over {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-label {
+    cursor: pointer;
+    display: block;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.upload-text {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.upload-subtext {
+    color: #718096;
+    font-size: 0.875rem;
+}
+
+.preview-section {
+    margin-bottom: 2rem;
+}
+
+.preview-title {
+    color: #2d3748;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.image-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.preview-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.image-info {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-name {
+    font-size: 0.75rem;
+    color: #4a5568;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.remove-btn {
+    background: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.options-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.option-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.select-input {
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: #4299e1;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #3182ce;
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #2d3748;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e0;
+}
+
+.btn-success {
+    background: #48bb78;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #38a169;
+}
+
+.loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.progress-section {
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4299e1;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    text-align: center;
+    color: #4a5568;
+    font-size: 0.875rem;
+}
+
+.download-section {
+    text-align: center;
+}
+
+.success-message {
+    padding: 2rem;
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 8px;
+}
+
+.success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.success-message h3 {
+    color: #2f855a;
+    margin-bottom: 1rem;
+}
+</style>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="converter-card">
+            <div class="header">
+                <h1 class="title">JPG to PDF Converter</h1>
+                <p class="subtitle">Convert your JPG images to PDF format instantly</p>
+            </div>
+
+            <div class="upload-section">
+                <div class="file-input-wrapper">
+                    <input type="file" id="imageInput" accept=".jpg,.jpeg,.png" multiple class="file-input">
+                    <label for="imageInput" class="file-label">
+                        <div class="upload-icon">📁</div>
+                        <span class="upload-text">Choose JPG Files or Drag & Drop</span>
+                        <span class="upload-subtext">Support multiple files</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h3 class="preview-title">Selected Images</h3>
+                <div class="image-grid" id="imageGrid"></div>
+                
+                <div class="options-panel">
+                    <div class="option-group">
+                        <label class="option-label">Page Size:</label>
+                        <select id="pageSize" class="select-input">
+                            <option value="a4">A4</option>
+                            <option value="letter">Letter</option>
+                            <option value="legal">Legal</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label class="option-label">Image Quality:</label>
+                        <select id="imageQuality" class="select-input">
+                            <option value="0.9">High</option>
+                            <option value="0.7">Medium</option>
+                            <option value="0.5">Low</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label class="option-label">Fit Mode:</label>
+                        <select id="fitMode" class="select-input">
+                            <option value="fit">Fit to Page</option>
+                            <option value="stretch">Stretch</option>
+                            <option value="center">Center</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <button class="btn btn-secondary" onclick="clearImages()">Clear All</button>
+                <button class="btn btn-primary" onclick="convertToPDF()">
+                    <span class="btn-text">Convert to PDF</span>
+                    <div class="loading-spinner" style="display: none;"></div>
+                </button>
+            </div>
+
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Processing...</p>
+            </div>
+
+            <div class="download-section" id="downloadSection" style="display: none;">
+                <div class="success-message">
+                    <div class="success-icon">✅</div>
+                    <h3>PDF Created Successfully!</h3>
+                    <button class="btn btn-success" id="downloadBtn">Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedFiles = [];
+        
+        // File input handling
+        document.getElementById('imageInput').addEventListener('change', handleFileSelect);
+        
+        // Drag and drop functionality
+        const uploadSection = document.querySelector('.upload-section');
+        
+        uploadSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('drag-over');
+        });
+        
+        uploadSection.addEventListener('dragleave', () => {
+            uploadSection.classList.remove('drag-over');
+        });
+        
+        uploadSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('drag-over');
+            const files = Array.from(e.dataTransfer.files).filter(file => 
+                file.type.startsWith('image/')
+            );
+            handleFiles(files);
+        });
+        
+        function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            handleFiles(files);
+        }
+        
+        function handleFiles(files) {
+            selectedFiles = files;
+            if (files.length > 0) {
+                showPreview();
+                displayImages();
+            }
+        }
+        
+        function showPreview() {
+            document.getElementById('previewSection').style.display = 'block';
+            document.getElementById('actionButtons').style.display = 'flex';
+        }
+        
+        function displayImages() {
+            const imageGrid = document.getElementById('imageGrid');
+            imageGrid.innerHTML = '';
+            
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageCard = document.createElement('div');
+                    imageCard.className = 'image-card';
+                    imageCard.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview ${index + 1}" class="preview-image">
+                        <div class="image-info">
+                            <span class="image-name">${file.name}</span>
+                            <button class="remove-btn" onclick="removeImage(${index})">×</button>
+                        </div>
+                    `;
+                    imageGrid.appendChild(imageCard);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function removeImage(index) {
+            selectedFiles.splice(index, 1);
+            if (selectedFiles.length === 0) {
+                clearImages();
+            } else {
+                displayImages();
+            }
+        }
+        
+        function clearImages() {
+            selectedFiles = [];
+            document.getElementById('previewSection').style.display = 'none';
+            document.getElementById('actionButtons').style.display = 'none';
+            document.getElementById('downloadSection').style.display = 'none';
+            document.getElementById('imageInput').value = '';
+        }
+        
+        async function convertToPDF() {
+            if (selectedFiles.length === 0) return;
+            
+            // Show progress
+            document.getElementById('progressSection').style.display = 'block';
+            document.querySelector('.btn-primary .btn-text').style.display = 'none';
+            document.querySelector('.loading-spinner').style.display = 'inline-block';
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                
+                const pageSize = document.getElementById('pageSize').value;
+                const quality = parseFloat(document.getElementById('imageQuality').value);
+                const fitMode = document.getElementById('fitMode').value;
+                
+                // Set page dimensions based on selection
+                let pageWidth, pageHeight;
+                switch(pageSize) {
+                    case 'a4':
+                        pageWidth = 210; pageHeight = 297;
+                        break;
+                    case 'letter':
+                        pageWidth = 216; pageHeight = 279;
+                        break;
+                    case 'legal':
+                        pageWidth = 216; pageHeight = 356;
+                        break;
+                }
+                
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    const file = selectedFiles[i];
+                    
+                    // Update progress
+                    const progress = ((i + 1) / selectedFiles.length) * 100;
+                    document.getElementById('progressFill').style.width = progress + '%';
+                    document.getElementById('progressText').textContent = `Processing image ${i + 1} of ${selectedFiles.length}...`;
+                    
+                    const imageData = await fileToBase64(file);
+                    
+                    if (i > 0) {
+                        pdf.addPage();
+                    }
+                    
+                    // Add image based on fit mode
+                    const img = new Image();
+                    img.src = imageData;
+                    
+                    await new Promise(resolve => {
+                        img.onload = () => {
+                            const imgWidth = img.width;
+                            const imgHeight = img.height;
+                            
+                            let finalWidth, finalHeight, x, y;
+                            
+                            switch(fitMode) {
+                                case 'fit':
+                                    const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+                                    finalWidth = imgWidth * ratio;
+                                    finalHeight = imgHeight * ratio;
+                                    x = (pageWidth - finalWidth) / 2;
+                                    y = (pageHeight - finalHeight) / 2;
+                                    break;
+                                case 'stretch':
+                                    finalWidth = pageWidth;
+                                    finalHeight = pageHeight;
+                                    x = 0; y = 0;
+                                    break;
+                                case 'center':
+                                    finalWidth = Math.min(imgWidth, pageWidth);
+                                    finalHeight = Math.min(imgHeight, pageHeight);
+                                    x = (pageWidth - finalWidth) / 2;
+                                    y = (pageHeight - finalHeight) / 2;
+                                    break;
+                            }
+                            
+                            pdf.addImage(imageData, 'JPEG', x, y, finalWidth, finalHeight, undefined, 'FAST');
+                            resolve();
+                        };
+                    });
+                }
+                
+                // Generate PDF blob
+                const pdfBlob = pdf.output('blob');
+                const pdfUrl = URL.createObjectURL(pdfBlob);
+                
+                // Show download section
+                document.getElementById('progressSection').style.display = 'none';
+                document.getElementById('downloadSection').style.display = 'block';
+                
+                document.getElementById('downloadBtn').onclick = () => {
+                    const a = document.createElement('a');
+                    a.href = pdfUrl;
+                    a.download = 'converted-images.pdf';
+                    a.click();
+                };
+                
+            } catch (error) {
+                console.error('Error converting to PDF:', error);
+                alert('Error converting images to PDF. Please try again.');
+            } finally {
+                // Reset button
+                document.querySelector('.btn-primary .btn-text').style.display = 'inline';
+                document.querySelector('.loading-spinner').style.display = 'none';
+            }
+        }
+        
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+</body>
+</html>

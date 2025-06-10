@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert PDF to Markdown Online Free | PDF to MD Converter | SmartConverter</title>
+    <meta name="description" content="Convert PDF files to Markdown format online for free. Extract text and formatting from PDFs to editable Markdown files." />
+    <meta name="keywords" content="PDF to Markdown, PDF to MD, convert PDF to Markdown, free PDF converter, text extraction" />
+    <meta name="author" content="SmartConverter Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://yourwebsite.com/pdf-to-markdown.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <style>
+        /* Additional specific styles for Markdown converter */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            height: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display:  flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        .auth-buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-btn {
+            color: white;
+            border: 1px solid white;
+        }
+        
+        .register-btn {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #3498db;
+        }
+        .markdown-preview {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+
+        .markdown-preview h1, 
+        .markdown-preview h2, 
+        .markdown-preview h3 {
+            color: #333;
+            margin: 15px 0 10px 0;
+        }
+
+        .markdown-preview code {
+            background: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .markdown-preview pre {
+            background: #2d2d2d;
+            color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .markdown-preview blockquote {
+            border-left: 4px solid #6c757d;
+            padding-left: 15px;
+            color: #6c757d;
+            margin: 10px 0;
+        }
+
+        .markdown-preview ul, 
+        .markdown-preview ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        /* Preview toggle button */
+        .preview-toggle {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        
+        .preview-toggle:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">Smart<span>Converter</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="tools.html">Tools</a></li>
+                    <!-- <li><a href="#">Pricing</a></li> -->
+                    <li><a href="about.html">About Us</a></li>
+                    <!-- <li><a href="#">Contact</a></li> -->
+                    <li><a href="index.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="#" class="login-btn">Sign In</a>
+                <a href="#" class="register-btn">Register</a>
+            </div> -->
+        </div>
+    </header>
+    <div class="container">
+        <div class="header">
+            <div class="tool-icon">
+                <i class="fas fa-file-code"></i>
+            </div>
+            <h1>Advanced PDF to Markdown Converter</h1>
+            <p>Convert your PDF files to clean Markdown format with preserved formatting</p>
+        </div>
+
+        <div class="main-card">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="upload-text">
+                    <h3>Upload PDF File</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+            </div>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <h3><i class="fas fa-cog"></i> Conversion Options</h3>
+                    <div class="option-item">
+                        <input type="checkbox" id="preserveHeadings" checked>
+                        <label for="preserveHeadings">Preserve headings structure</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="includeImages" checked>
+                        <label for="includeImages">Include images (as links)</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="preserveLists" checked>
+                        <label for="preserveLists">Preserve lists formatting</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="includeTables" checked>
+                        <label for="includeTables">Include tables (basic format)</label>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <h3><i class="fas fa-tachometer-alt"></i> Advanced Settings</h3>
+                    <div class="option-item">
+                        <input type="checkbox" id="removePageNumbers" checked>
+                        <label for="removePageNumbers">Remove page numbers</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="smartQuotes" checked>
+                        <label for="smartQuotes">Convert to smart quotes</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="normalizeWhitespace" checked>
+                        <label for="normalizeWhitespace">Normalize whitespace</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="frontMatter" checked>
+                        <label for="frontMatter">Include YAML front matter</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conversion-status" id="conversionStatus">
+                <div class="status-step">
+                    <div class="step-icon pending">1</div>
+                    <div>Uploading PDF file</div>
+                </div>
+                <div class="status-step">
+                    <div class="step-icon pending">2</div>
+                    <div>Extracting text content</div>
+                </div>
+                <div class="status-step">
+                    <div class="step-icon pending">3</div>
+                    <div>Formatting Markdown</div>
+                </div>
+                <div class="status-step">
+                    <div class="step-icon pending">4</div>
+                    <div>Finalizing output</div>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText">Error message will appear here</span>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="convertBtn" disabled>
+                    <i class="fas fa-exchange-alt"></i> Convert to Markdown
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+
+            <div class="result-card" id="resultCard">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Conversion Successful!</h2>
+                <p id="resultInfo">Your Markdown file is ready for download</p>
+                
+                <div class="download-preview">
+                    <div class="preview-header">
+                        <div class="preview-info">
+                            <h4 id="outputFilename">document.md</h4>
+                            <p id="outputFilesize">0.00 KB</p>
+                        </div>
+                        <div class="file-icon">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="file-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="sectionCount">0</div>
+                            <div class="stat-label">Sections</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="wordCount">0</div>
+                            <div class="stat-label">Words</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="codeBlockCount">0</div>
+                            <div class="stat-label">Code Blocks</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="imageLinkCount">0</div>
+                            <div class="stat-label">Image Links</div>
+                        </div>
+                    </div>
+                    
+                    <button class="preview-toggle" id="previewToggle">
+                        <i class="fas fa-eye"></i> Show Preview
+                    </button>
+                    
+                    <div class="markdown-preview" id="markdownPreview" style="display: none;"></div>
+                </div>
+                
+                <div class="action-buttons" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download Markdown File
+                    </button>
+                    <button class="btn btn-secondary" id="newConvertBtn">
+                        <i class="fas fa-plus"></i> Convert Another
+                    </button>
+                </div>
+            </div>
+            
+            <div class="security-note">
+                <i class="fas fa-lock"></i>
+                <p>Your files are processed securely and never stored on our servers</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set PDF.js worker path
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+
+        class PDFToMarkdownConverter {
+            constructor() {
+                this.selectedFile = null;
+                this.convertedBlob = null;
+                this.markdownContent = '';
+                this.conversionOptions = {
+                    preserveHeadings: true,
+                    includeImages: true,
+                    preserveLists: true,
+                    includeTables: true,
+                    removePageNumbers: true,
+                    smartQuotes: true,
+                    normalizeWhitespace: true,
+                    frontMatter: true
+                };
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const uploadZone = document.getElementById('uploadZone');
+                const fileInput = document.getElementById('fileInput');
+                const convertBtn = document.getElementById('convertBtn');
+                const clearBtn = document.getElementById('clearBtn');
+                const downloadBtn = document.getElementById('downloadBtn');
+                const newConvertBtn = document.getElementById('newConvertBtn');
+                const previewToggle = document.getElementById('previewToggle');
+                
+                // Option checkboxes
+                document.querySelectorAll('.option-item input').forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        this.conversionOptions[e.target.id] = e.target.checked;
+                    });
+                });
+
+                // Upload zone events
+                uploadZone.addEventListener('click', () => fileInput.click());
+                uploadZone.addEventListener('dragover', this.handleDragOver.bind(this));
+                uploadZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                uploadZone.addEventListener('drop', this.handleDrop.bind(this));
+
+                // File input change
+                fileInput.addEventListener('change', this.handleFileSelect.bind(this));
+
+                // Button events
+                convertBtn.addEventListener('click', this.convertToMarkdown.bind(this));
+                clearBtn.addEventListener('click', this.clearFile.bind(this));
+                downloadBtn.addEventListener('click', this.downloadMarkdownFile.bind(this));
+                newConvertBtn.addEventListener('click', this.resetTool.bind(this));
+                previewToggle.addEventListener('click', this.togglePreview.bind(this));
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.add('dragover');
+            }
+
+            handleDragLeave(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                document.getElementById('uploadZone').classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files);
+                if (files.length > 0 && files[0].type === 'application/pdf') {
+                    this.handleFile(files[0]);
+                } else {
+                    this.showError('Please upload a valid PDF file');
+                }
+            }
+
+            handleFileSelect(e) {
+                if (e.target.files.length > 0) {
+                    this.handleFile(e.target.files[0]);
+                }
+            }
+
+            handleFile(file) {
+                if (file.type === 'application/pdf') {
+                    this.selectedFile = file;
+                    document.getElementById('convertBtn').disabled = false;
+                    
+                    // Update UI to show selected file
+                    const uploadText = document.querySelector('.upload-text');
+                    uploadText.innerHTML = `
+                        <h3>${file.name}</h3>
+                        <p>${(file.size / 1024 / 1024).toFixed(2)} MB • Ready to convert</p>
+                    `;
+                    
+                    this.hideError();
+                } else {
+                    this.showError('Please select a PDF file');
+                }
+            }
+
+            async convertToMarkdown() {
+                if (!this.selectedFile) return;
+                
+                const conversionStatus = document.getElementById('conversionStatus');
+                const steps = conversionStatus.querySelectorAll('.status-step');
+                const convertBtn = document.getElementById('convertBtn');
+                
+                // Reset UI
+                this.hideError();
+                conversionStatus.style.display = 'block';
+                convertBtn.disabled = true;
+                
+                try {
+                    // Step 1: Uploading
+                    steps[0].querySelector('.step-icon').classList.remove('pending');
+                    steps[0].querySelector('.step-icon').classList.add('processing');
+                    
+                    // Read the PDF file
+                    const arrayBuffer = await this.readFileAsArrayBuffer(this.selectedFile);
+                    await this.delay(500);
+                    steps[0].querySelector('.step-icon').classList.remove('processing');
+                    steps[0].querySelector('.step-icon').classList.add('completed');
+                    
+                    // Step 2: Extracting text
+                    steps[1].querySelector('.step-icon').classList.remove('pending');
+                    steps[1].querySelector('.step-icon').classList.add('processing');
+                    
+                    // Load the PDF document
+                    const loadingTask = pdfjsLib.getDocument(arrayBuffer);
+                    const pdf = await loadingTask.promise;
+                    
+                    // Extract text from all pages
+                    this.markdownContent = '';
+                    let totalPages = pdf.numPages;
+                    let sectionCount = 0;
+                    let wordCount = 0;
+                    let codeBlockCount = 0;
+                    let imageLinkCount = 0;
+                    
+                    for (let i = 1; i <= totalPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const textContent = await page.getTextContent();
+                        const pageText = textContent.items.map(item => item.str).join(' ');
+                        
+                        // Convert page text to Markdown
+                        const pageMarkdown = this.convertTextToMarkdown(pageText, i === 1);
+                        this.markdownContent += pageMarkdown;
+                        
+                        // Update counts
+                        wordCount += pageText.split(/\s+/).length;
+                        sectionCount += (pageMarkdown.match(/\n#+/g) || []).length;
+                        codeBlockCount += (pageMarkdown.match(/```/g) || []).length / 2;
+                    }
+                    
+                    await this.delay(1000);
+                    steps[1].querySelector('.step-icon').classList.remove('processing');
+                    steps[1].querySelector('.step-icon').classList.add('completed');
+                    
+                    // Step 3: Formatting Markdown
+                    steps[2].querySelector('.step-icon').classList.remove('pending');
+                    steps[2].querySelector('.step-icon').classList.add('processing');
+                    
+                    // Add YAML front matter if enabled
+                    if (this.conversionOptions.frontMatter) {
+                        this.markdownContent = `---
+title: "Converted from ${this.selectedFile.name}"
+date: "${new Date().toISOString()}"
+original: "${this.selectedFile.name}"
+pages: ${totalPages}
+---
+
+${this.markdownContent}`;
+                    }
+                    
+                    // Apply additional formatting
+                    this.markdownContent = this.applyMarkdownFormatting(this.markdownContent);
+                    
+                    await this.delay(1000);
+                    steps[2].querySelector('.step-icon').classList.remove('processing');
+                    steps[2].querySelector('.step-icon').classList.add('completed');
+                    
+                    // Step 4: Finalizing
+                    steps[3].querySelector('.step-icon').classList.remove('pending');
+                    steps[3].querySelector('.step-icon').classList.add('processing');
+                    
+                    // Create blob
+                    this.convertedBlob = new Blob([this.markdownContent], { type: 'text/markdown' });
+                    
+                    // Show results
+                    this.showResult({
+                        sectionCount,
+                        wordCount,
+                        codeBlockCount,
+                        imageLinkCount,
+                        fileSize: (this.convertedBlob.size / 1024).toFixed(2),
+                        totalPages
+                    });
+                    
+                    await this.delay(500);
+                    steps[3].querySelector('.step-icon').classList.remove('processing');
+                    steps[3].querySelector('.step-icon').classList.add('completed');
+                    
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    this.showError('Conversion failed. Please try again.');
+                    conversionStatus.style.display = 'none';
+                    convertBtn.disabled = false;
+                    
+                    // Reset steps
+                    steps.forEach(step => {
+                        step.querySelector('.step-icon').className = 'step-icon pending';
+                    });
+                }
+            }
+
+            readFileAsArrayBuffer(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsArrayBuffer(file);
+                });
+            }
+
+            convertTextToMarkdown(text, isFirstPage) {
+                // Basic text to Markdown conversion
+                let md = text;
+                
+                // Remove page numbers if enabled
+                if (this.conversionOptions.removePageNumbers) {
+                    md = md.replace(/\bpage\s*\d+/gi, '');
+                }
+                
+                // Convert headings
+                if (this.conversionOptions.preserveHeadings) {
+                    // Detect headings by font size or style (this is simplified)
+                    md = md.replace(/\n([A-Z][A-Z0-9 ]+)\n/g, '\n## $1\n');
+                }
+                
+                // Convert lists
+                if (this.conversionOptions.preserveLists) {
+                    md = md.replace(/\n•\s+/g, '\n- ');
+                    md = md.replace(/\n\d+\.\s+/g, '\n1. ');
+                }
+                
+                // Convert tables (basic)
+                if (this.conversionOptions.includeTables) {
+                    // Simple table detection (very basic)
+                    md = md.replace(/(.+?)\t(.+?)\t(.+?)(\n|$)/g, '| $1 | $2 | $3 |\n');
+                }
+                
+                // Normalize whitespace
+                if (this.conversionOptions.normalizeWhitespace) {
+                    md = md.replace(/\s+/g, ' ');
+                    md = md.replace(/\n\s+\n/g, '\n\n');
+                }
+                
+                // Convert to smart quotes
+                if (this.conversionOptions.smartQuotes) {
+                    md = md.replace(/"([^"]+)"/g, '“$1”');
+                    md = md.replace(/'([^']+)'/g, '‘$1’');
+                }
+                
+                return md;
+            }
+
+            applyMarkdownFormatting(md) {
+                // Additional formatting passes
+                // Convert code blocks
+                md = md.replace(/```([^`]+)```/g, '```\n$1\n```');
+                
+                // Ensure proper line breaks
+                md = md.replace(/\n{3,}/g, '\n\n');
+                
+                return md;
+            }
+
+            showResult({sectionCount, wordCount, codeBlockCount, imageLinkCount, fileSize, totalPages}) {
+                const resultCard = document.getElementById('resultCard');
+                const conversionStatus = document.getElementById('conversionStatus');
+                
+                // Update result info
+                document.getElementById('outputFilename').textContent = 'converted_document.md';
+                document.getElementById('outputFilesize').textContent = `${fileSize} KB`;
+                document.getElementById('sectionCount').textContent = sectionCount;
+                document.getElementById('wordCount').textContent = wordCount;
+                document.getElementById('codeBlockCount').textContent = codeBlockCount;
+                document.getElementById('imageLinkCount').textContent = imageLinkCount;
+                
+                // Update preview
+                document.getElementById('markdownPreview').textContent = this.markdownContent;
+                
+                // Show result card
+                conversionStatus.style.display = 'none';
+                resultCard.style.display = 'block';
+                
+                // Smooth scroll to result
+                resultCard.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            downloadMarkdownFile() {
+                if (!this.convertedBlob) return;
+
+                const url = URL.createObjectURL(this.convertedBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'converted_document.md';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            togglePreview() {
+                const preview = document.getElementById('markdownPreview');
+                const toggleBtn = document.getElementById('previewToggle');
+                
+                if (preview.style.display === 'none') {
+                    preview.style.display = 'block';
+                    toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Preview';
+                } else {
+                    preview.style.display = 'none';
+                    toggleBtn.innerHTML = '<i class="fas fa-eye"></i> Show Preview';
+                }
+            }
+
+            showError(message) {
+                const errorMessage = document.getElementById('errorMessage');
+                document.getElementById('errorText').textContent = message;
+                errorMessage.style.display = 'block';
+            }
+
+            hideError() {
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+
+            clearFile() {
+                this.selectedFile = null;
+                this.convertedBlob = null;
+                this.markdownContent = '';
+                document.getElementById('fileInput').value = '';
+                document.getElementById('convertBtn').disabled = true;
+                document.getElementById('markdownPreview').textContent = '';
+                document.getElementById('markdownPreview').style.display = 'none';
+                document.getElementById('previewToggle').innerHTML = '<i class="fas fa-eye"></i> Show Preview';
+                
+                // Reset upload zone
+                const uploadText = document.querySelector('.upload-text');
+                uploadText.innerHTML = `
+                    <h3>Upload PDF File</h3>
+                    <p>Drag & drop your PDF file here or click to browse</p>
+                `;
+                
+                this.hideError();
+            }
+
+            resetTool() {
+                this.clearFile();
+                document.getElementById('resultCard').style.display = 'none';
+                document.getElementById('conversionStatus').style.display = 'none';
+                
+                // Reset conversion steps
+                const steps = document.querySelectorAll('.status-step');
+                steps.forEach(step => {
+                    step.querySelector('.step-icon').className = 'step-icon pending';
+                });
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Initialize the converter
+        const pdfToMarkdownConverter = new PDFToMarkdownConverter();
+    </script>
+</body>
+</html>
