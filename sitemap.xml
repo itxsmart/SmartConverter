@@ -1,172 +1,210 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://smartconverter.netlify.app/</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/tools</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/about</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/merge-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/split-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/extract-pages</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/delete-pages</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/organize-pages</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/pdf-to-word</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/pdf-to-excel</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/pdf-to-powerpoint</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/pdf-to-jpg</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/word-to-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/excel-to-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/ppt-to-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/jpg-to-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/pdf-to-markdown</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/pdf_generator</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/compress-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/repair-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/ocr-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/rotate-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/add-watermark</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/crop-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/redact-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/scan-to-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/webpage-to-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/barcode-to-pdf</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/terms-of-service</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/privacy-policy</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/cookie</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://smartconverter.netlify.app/contact-us</loc>
-  <lastmod>2025-06-10T20:08:27+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://smartconverter.netlify.app/</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>1.00</priority>
+    </url>
+    
+    <!-- Main Pages -->
+    <url>
+        <loc>https://smartconverter.netlify.app/index.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/about.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/contact-us.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/help-center.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/tools.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.85</priority>
+    </url>
+    
+    <!-- PDF Tools -->
+    <url>
+        <loc>https://smartconverter.netlify.app/merge-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/split-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/extract-pages.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/delete-pages.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/organize-pages.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/compress-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/repair-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/ocr-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/rotate-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/add-watermark.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/crop-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/redact-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/scan-to-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/compare-pdfs.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    
+    <!-- Conversion Tools -->
+    <url>
+        <loc>https://smartconverter.netlify.app/pdf-to-word.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/pdf-to-excel.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/pdf-to-powerpoint.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/pdf-to-jpg.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/pdf-to-markdown.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/word-to-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/excel-to-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/ppt-to-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/jpg-to-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/webpage-to-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/barcode-to-pdf.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.80</priority>
+    </url>
+    
+    <!-- Other Pages -->
+    <url>
+        <loc>https://smartconverter.netlify.app/pdf_generator.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/test.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.30</priority>
+    </url>
+    
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://smartconverter.netlify.app/terms-of-service.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/privacy-policy.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/cookie.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://smartconverter.netlify.app/GDPR.html</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.30</priority>
+    </url>
+    
+    <!-- Static Resources -->
+    <url>
+        <loc>https://smartconverter.netlify.app/styles.css</loc>
+        <lastmod>2025-06-10</lastmod>
+        <priority>0.10</priority>
+    </url>
 </urlset>

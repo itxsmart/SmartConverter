@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /styles.css
+
+Sitemap: https://smartconverter.netlify.app/sitemap.xml
